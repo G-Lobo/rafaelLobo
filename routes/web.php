@@ -3,11 +3,21 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BlogPostController;
+use App\Http\Controllers\MovieController;
 
 Route::get('/', function () {
     return view('home');
 });
 
+
+/* Rotas de Filmes */
+Route::get('/filmes', [MovieController::class, 'index'])->name('movies.index');
+Route::get('/filmes/create', [MovieController::class, 'create'])->name('movies.create');
+Route::post('/filmes', [MovieController::class, 'store'])->name('movies.store');
+Route::get('/filmes/{movie}', [MovieController::class, 'show'])->name('movies.show');
+Route::get('/filmes/{movie}/edit', [MovieController::class, 'edit'])->name('movies.edit');
+Route::put('/filmes/{movie}', [MovieController::class, 'update'])->name('movies.update');
+Route::delete('/filmes/{movie}', [MovieController::class, 'destroy'])->name('movies.destroy');
 
 /* Blog Posts */
 Route::get('/blog', [BlogPostController::class, 'index'])->name('blog.index');
