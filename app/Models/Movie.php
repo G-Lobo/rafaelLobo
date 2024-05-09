@@ -2,14 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Prize;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Movie extends Model
 {
     use HasFactory;
 
-
+    public function prizes() {
+        return $this->hasMany(Prize::class);
+    }
 
 
 
@@ -18,6 +21,7 @@ class Movie extends Model
         'releaseDate',
         'content',
         'coverArt',
+        'link',
         'videoLink',
         'duration',
     ];

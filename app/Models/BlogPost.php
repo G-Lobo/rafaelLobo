@@ -15,6 +15,7 @@ class BlogPost extends Model
         'content',
         'image',
         'video',
+        'link',
     ];
 
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Movie;
+use App\Models\Prize;
 use Illuminate\Http\Request;
 
 class MovieController extends Controller
@@ -37,7 +38,7 @@ class MovieController extends Controller
         $movie->content = $request->content;
         $movie->coverArt = $request->coverArt;
         $movie->duration = $request->duration;
-        // $movie->videoLink = $request->videoLink;
+        $movie->link = $request->link;
 
         //upload coverArt image
         if ($request->hasFile('coverArt') && $request->file('coverArt')->isValid()) {
@@ -52,11 +53,9 @@ class MovieController extends Controller
             $movie->coverArt = $imageName;
         }
 
-        //upload Prizes images
-
         //link manipulation
-        if ($request->has('videoLink') && !empty($request->input('videoLink'))) {
-            $linkToManipulate = $request->videoLink;
+        if ($request->has('link') && !empty($request->input('link'))) {
+            $linkToManipulate = $request->link;
             $embedLink = $this->videoEmbeder($linkToManipulate);
             $movie->videoLink = $embedLink;
         }
@@ -64,7 +63,27 @@ class MovieController extends Controller
         //save
         $movie->save();
 
-        return redirect()->route('movies.index');
+        //upload Prizes images
+
+        if ($request->hasFile('prizes')) {
+
+            for ($i = 0; $i < count($request->allFiles()['prizes']); $i++) {
+
+                $file = $request->allFiles()['prizes'][$i];
+
+                $extension = $file->extension();
+
+                $imageName = md5($file->getClientOriginalName() . strtotime('now')) . "." . $extension;
+                $prize = new Prize();
+                $prize->movie_id = $movie->id;
+                $file->move(public_path('assets/img/prizes'), $imageName);
+                $prize->image = $imageName;
+                // dd($imageName);
+                $prize->save();
+            }
+        }
+
+        return redirect()->route('movies.index')->with('success', 'Postagem criada');
     }
 
     /**
@@ -96,23 +115,50 @@ class MovieController extends Controller
 
         //update de coverArt
         if ($request->hasFile('coverArt') && $request->file('coverArt')->isValid()) {
-            $requestImage = $request->image;
+            $requestImage = $request->coverArt;
             $extension = $requestImage->extension();
             $imageName = md5($requestImage->getClientOriginalName() . strtotime('now')) . "." . $extension;
-            $requestImage->move(public_path('assets/img/coverArts'));
+            $requestImage->move(public_path('assets/img/coverArts'), $imageName);
             $data['coverArt'] = $imageName;
         }
 
-        //update de link youtube
-        if($request->has('videoLink') && !empty($request->input('videoLink'))){
-            $toBeEmbed = $request->videoLink;
+        //update de video
+        if ($request->has('link') && !empty($request->input('link'))) {
+            $toBeEmbed = $request->link;
             $embedLink = $this->videoEmbeder($toBeEmbed);
             $data['videoLink'] = $embedLink;
         }
 
+        //update dos premios
+
+        if ($request->hasFile('prizes')) {
+            $prizeImages = $request->allFiles()['prizes'];
+            $oldPrizeImages = $movie->prizes->pluck('image')->all();
+
+            foreach ($prizeImages as $i => $file) {
+                $extension = $file->extension();
+                $imageName = md5($file->getClientOriginalName() . strtotime('now')) . "." . $extension;
+                $file->move(public_path('assets/img/prizes'), $imageName);
+
+                // Update or create a new Prize model
+                $prize = Prize::firstOrNew(['movie_id' => $movie->id, 'image' => $imageName]);
+                $prize->image = $imageName;
+                $prize->save();
+
+                // Remove old images that are no longer used
+                if (!in_array($imageName, $oldPrizeImages)) {
+                    foreach ($oldPrizeImages as $oldImage) {
+                        if (file_exists(public_path('assets/img/prizes/' . $oldImage))) {
+                            unlink(public_path('assets/img/prizes/' . $oldImage));
+                        }
+                    }
+                }
+            }
+        }
+
         Movie::findOrFail($movie->id)->update($data);
 
-        return redirect()->back();
+        return redirect()->route('movies.index')->with('success', 'Postagem alterada');
     }
 
     /**
@@ -122,25 +168,6 @@ class MovieController extends Controller
     {
         Movie::findOrFail($movie->id)->delete();
 
-        return redirect()->route('movies.index');
-    }
-
-    public function videoEmbeder(string $link)
-    {
-        $pos_vimeo = strpos($link, "vimeo");
-        $pos_youtube = strpos($link, "youtube");
-
-        switch (true) {
-            case $pos_vimeo !== false:
-                $embedLink = str_replace("vimeo.com", "player.vimeo.com/video", $link);
-                return $embedLink;
-                break;
-            case $pos_youtube !== false:
-                $embedLink = str_replace("watch?v=", "embed/", $link);
-                return $embedLink;
-                break;
-            default:
-                echo "Opa :(";
-        }
+        return redirect()->route('movies.index')->with('success', 'Postagem deletada');
     }
 }

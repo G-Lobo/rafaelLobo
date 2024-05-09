@@ -12,7 +12,7 @@ class BlogPostController extends Controller
      */
     public function index()
     {
-        $blogPosts = BlogPost::all();
+        $blogPosts = BlogPost::paginate(6);
         return view('blogPosts.index', compact('blogPosts'));
     }
 
@@ -31,11 +31,18 @@ class BlogPostController extends Controller
     {
         $post = new BlogPost();
 
+
+        $request->validate([
+            'title' => 'required',
+
+        ]);
+
+
         //$post->id = $request->id;
         $post->title = $request->title;
         $post->content = $request->content;
         $post->image = $request->image;
-        $post->video = $request->video;
+        $post->link = $request->link;
 
         if($request->hasFile('image') && $request->file('image')->isValid()) {
 
@@ -46,9 +53,17 @@ class BlogPostController extends Controller
             $post->image = $imageName;
         }
 
+
+        if ($request->has('link') && !empty($request->input('link'))) {
+            $linkToManipulate = $request->link;
+            $embedLink = $this->videoEmbeder($linkToManipulate);
+            $post->video = $embedLink;
+        }
+
+
         $post->save();
 
-        return redirect()->route('blog.index');
+        return redirect()->route('blog.index')->with('success', 'Postagem criada');
     }
 
 
@@ -79,6 +94,7 @@ class BlogPostController extends Controller
     {
         $data = $request->all();
 
+        //update img
         if($request->hasFile('image') && $request->file('image')->isValid()) {
 
             $requestImage = $request->image;
@@ -88,9 +104,16 @@ class BlogPostController extends Controller
             $data['image'] = $imageName;
         }
 
+        //update video
+        if ($request->has('link') && !empty($request->input('link'))) {
+            $toBeEmbed = $request->link;
+            $embedLink = $this->videoEmbeder($toBeEmbed);
+            $data['video'] = $embedLink;
+        }
+
         BlogPost::findOrFail($blogPost->id)->update($data);
 
-        return redirect()->route('blog.index');
+        return redirect()->route('blog.index')->with('success', 'Postagem Alterada');
     }
 
     /**
@@ -100,6 +123,6 @@ class BlogPostController extends Controller
     {
         BlogPost::findOrFail($blogPost->id)->delete();
 
-        return redirect()->route('blog.index');
+        return redirect()->route('blog.index')->with('success', 'Postagem deletada');
     }
 }

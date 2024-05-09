@@ -24,8 +24,8 @@ create
 </div>
 
 <div>
-    <label for="video">Vídeo:</label>
-    <input type="text" id="video" name="video">
+    <label for="link">Vídeo:</label>
+    <input type="text" id="link" name="link">
 </div>
 
 <div>
