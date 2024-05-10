@@ -33,8 +33,10 @@ class BlogPostController extends Controller
 
 
         $request->validate([
-            'title' => 'required',
-
+            'title' => ['required'],
+            'content' => ['required'],
+            'link' => ['nullable', 'url', 'regex:/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be|vimeo\.com)\/.+$/'],
+            'image' => ['nullable'],
         ]);
 
 
@@ -93,6 +95,13 @@ class BlogPostController extends Controller
     public function update(Request $request, BlogPost $blogPost)
     {
         $data = $request->all();
+
+        $request->validate([
+            'title' => ['required'],
+            'content' => ['required'],
+            'link' => ['nullable', 'url', 'regex:/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be|vimeo\.com)\/.+$/'],
+            'image' => ['nullable'],
+        ]);
 
         //update img
         if($request->hasFile('image') && $request->file('image')->isValid()) {

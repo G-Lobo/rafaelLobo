@@ -33,6 +33,15 @@ class MovieController extends Controller
     {
         $movie = new Movie();
 
+        $request->validate([
+            'title' => ['required'],
+            'releaseDate' => ['required'],
+            'content' => ['required'],
+            'coverArt' => ['required'],
+            'duration'  => ['required'],
+            'link' => ['nullable','url','regex:/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be|vimeo\.com)\/.+$/'],
+        ]);
+
         $movie->title = $request->title;
         $movie->releaseDate = $request->releaseDate;
         $movie->content = $request->content;
@@ -112,6 +121,15 @@ class MovieController extends Controller
     public function update(Request $request, Movie $movie)
     {
         $data = $request->all();
+
+        $request->validate([
+            'title' => ['required'],
+            'releaseDate' => ['required'],
+            'content' => ['required'],
+            'coverArt' => ['required'],
+            'duration'  => ['required'],
+            'link' => ['nullable','url','regex:/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be|vimeo\.com)\/.+$/'],
+        ]);
 
         //update de coverArt
         if ($request->hasFile('coverArt') && $request->file('coverArt')->isValid()) {

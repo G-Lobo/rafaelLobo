@@ -1,5 +1,1 @@
-Adicionar as validaçoes nas controllers de post e de filmes
-    adicionar a diretiva de erro (@error) para exibição das mensagens de erro da validação
-    adicionar a diretiva de old (@old) para que caso o formulario seja enviado e nao cumpra os requisitos as informaçoes do campo nao sejam apagadas
-
 adicionar a linguagem do laravel em PT-BT

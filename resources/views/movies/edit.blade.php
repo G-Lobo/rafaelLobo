@@ -1,3 +1,33 @@
+@extends('layouts.rafaelLobo')
+
+@section('header')
+header
+@endsection
+
+@section('content')
+edit
+
+
+{{-- mensagens de erro das validaçoes --}}
+@error('title')
+<div class="alert alert-danger">{{ $message }}</div>
+@enderror
+@error('releaseDate')
+<div class="alert alert-danger">{{ $message }}</div>
+@enderror
+@error('content')
+<div class="alert alert-danger">{{ $message }}</div>
+@enderror
+@error('coverArt')
+<div class="alert alert-danger">{{ $message }}</div>
+@enderror
+@error('duration')
+<div class="alert alert-danger">{{ $message }}</div>
+@enderror
+@error('link')
+<div class="alert alert-danger">{{ $message }}</div>
+@enderror
+
 <div>
 
     <form action="{{ route('movies.destroy', [$post->id]) }}" method="POST">
@@ -11,22 +41,22 @@
         @method('PUT')
         <div>
             <label for="title">Título do filme:</label>
-            <input type="text" name="title" id="title" value="{{ $post->title }}">
+            <input type="text" name="title" id="title" value="@if (old('title') == null) {{ $post->title }} @else {{old('title')}} @endif">
         </div>
 
         <div>
             <label for="duration">Duração do filme em minutos:</label>
-            <input type="number" name="duration" id="duration" value="{{ $post->duration }}">
+            <input type="number" name="duration" id="duration" value="@if (old('duration') == null) {{ $post->duration }} @else {{old('duration')}} @endif">
         </div>
 
         <div>
             <label for="releaseDate">Data de lançamento do filme:</label>
-            <input type="date" id="releaseDate" name="releaseDate" value="{{$post->releaseDate}}">
+            <input type="date" id="releaseDate" name="releaseDate" value="@if (old('releaseDate') == null) {{$post->releaseDate}} @else {{old('releaseDate')}} @endif">
         </div>
 
         <div>
             <label for="content">Conteúdo:</label>
-            <textarea name="content" id="content" cols="30" rows="10">{{ $post->content }}</textarea>
+            <textarea name="content" id="content" cols="30" rows="10">@if (old('content') == null) {{ $post->content }} @else {{old('content')}} @endif</textarea>
         </div>
         <div>
             <label for="coverArt">Imagem do Post:</label>
@@ -44,7 +74,7 @@
 
         <div>
             <label for="link">Link do filme:</label>
-            <input type="text" id="link" name="link" placeholder="link vimeo ou youtube" value="{{$post->link}}">
+            <input type="text" id="link" name="link" placeholder="link vimeo ou youtube" value="@if (old('link') == null) {{$post->link}} @else {{old('link')}} @endif">
         </div>
 
         <div>
@@ -55,3 +85,10 @@
 
     </form>
 </div>
+
+
+@endsection
+
+@section('footer')
+footer
+@endsection
