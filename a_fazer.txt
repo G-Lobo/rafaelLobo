@@ -1,2 +1,4 @@
+tentar adicionar o quill para o input de texto
+https://www.interviewsolutionshub.com/blog/how-to-use-quill-rich-text-editor-laravel
 
 frontend
