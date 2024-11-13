@@ -14,6 +14,14 @@ class Movie extends Model
         return $this->hasMany(Prize::class);
     }
 
+    public function filmType() {
+        return $this->hasOne(FilmType::class);
+    }
+
+    public function filmArea() {
+        return $this->hasMany(FilmArea::class);
+    }
+
 
 
     protected $fillable = [

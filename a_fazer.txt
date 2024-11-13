@@ -1,4 +1,61 @@
+adicionar taxonomia ao banco
+    ->filmes
+        ->Model FilmType
+            ->tipo ->"type" String
+                ->popular type com Longa;Curta;Animação;Video Arte
+        ->Filme has one FilmType
+
+        ->Model FilmArea
+            ->area ->"area" String
+            ->FilmArea Controller
+        ->Filme has many FilmArea
+
+
+adicionar novos campos nas paginas de create update
+
+filtrar filmes por tipo e area na pagina de index de filmes
+
+criar model ArtCollection
+    ->Coleção
+        ->nome ->"collectionName" String
+        ->imagens
+            ->Model images
+            ->descriçao -> "imageDescription" ->String
+            ->collection_id -> "collection_id" UnsignedBigInteger
+            ->fk ->foreign('collection_id')->references('id')->on('artCollection')->onDelete('cascade');
+            ->images belongs to ArtCollection
+        ->descriçao ->"description" String
+        ->resumo ->"excerpt" String
+        ->links -> "links" String
+        ->ArtCollections has many images
+
+        ->Model collectionType
+            ->type ->"type" String
+            ->collectionType Controller
+        ->ArtCollection has one collectionType
+
+
+
+cirar views referentes ao novo model ArtCollections
+
+
+criar model Bio
+    ->foto ->"profilePicture" String
+        ->logica para adiçao de foto
+    ->Texto Grande ->"headerText" String
+    ->Texto menor ->"bioTest" String
+    ->adicionar o CV ->"cv" ??? tipo a ser estudado
+    ->link instagram ->"instagramLink" String
+    ->link linkedIn->"linkedinLink" String
+    ->link Vimeo->"vimeoLink" String
+    ->link yt->"ytLink" String
+
+logica para trabalhos recentes(ou featured works -tirar essa duvida com o rafael-) aparecerem na pagina de bio pegando trabalhos dos bancos de filmes e de artes
+
+
 tentar adicionar o quill para o input de texto
 https://www.interviewsolutionshub.com/blog/how-to-use-quill-rich-text-editor-laravel
 
+
 frontend
+https://www.figma.com/design/BiNx4TOnLX8OB9aaHGzd1P/LoboSite
