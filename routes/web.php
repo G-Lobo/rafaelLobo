@@ -4,6 +4,7 @@ use App\Http\Controllers\ADMPannelController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BlogPostController;
+use App\Http\Controllers\FilmAreaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MovieController;
 
@@ -23,6 +24,11 @@ Route::middleware('auth', 'verified')->group(function () {
 
 Route::get('/filmes/{movie}', [MovieController::class, 'show'])->name('movies.show');
 
+/* Rotas de area de atuaçao no filme */
+Route::middleware('auth','verified')->group(function () {
+    Route::get('/area', [FilmAreaController::class, 'store'])->name('area.create');
+    Route::delete('/area/{area}', [FilmAreaController::class, 'destroy'])->name('area.destroy');
+});
 
 /* Blog Posts */
 Route::get('/blog', [BlogPostController::class, 'index'])->name('blog.index');

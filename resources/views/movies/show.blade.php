@@ -1,3 +1,19 @@
+@extends('layouts.rafaelLobo')
+
+@section('header')
+    header
+@endsection
+
+@section('content')
+    index
+
+    @if (session('success'))
+    <div>
+        {{ session('success') }}
+    </div>
+@endif
+
+
 {{$post->title}}
 <br>
 <br>
@@ -17,5 +33,10 @@
 <br>
 <br>
 @foreach ($post->prizes as $prize)
-    <img src="/assets/img/prizes/{{ $prize->image }}" alt="">
+    <img src="{{asset('assets/img/prizes/'. $prize->image) }}" alt="">
 @endforeach
+
+
+@section('footer')
+    footer
+@endsection

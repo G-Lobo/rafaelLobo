@@ -15,6 +15,7 @@
 
     @foreach ($movies as $movie)
         <br>
+        {{ $movie->id }}
         {{ $movie->title }}
         <br>
         {{$movie->releaseDate}}
