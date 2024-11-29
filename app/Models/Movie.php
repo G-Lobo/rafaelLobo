@@ -15,11 +15,11 @@ class Movie extends Model
     }
 
     public function filmType() {
-        return $this->hasOne(FilmType::class);
+        return $this->belongsTo(FilmType::class);
     }
 
     public function filmArea() {
-        return $this->hasMany(FilmArea::class);
+        return $this->belongsToMany(FilmArea::class);
     }
 
 

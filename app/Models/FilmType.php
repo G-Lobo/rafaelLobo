@@ -10,9 +10,8 @@ class FilmType extends Model
     use HasFactory;
 
     public function movie() {
-        return $this->BelongsTo(Movie::class);
+        return $this->HasMany(Movie::class);
     }
-
 
     protected $guarded = [];
 }

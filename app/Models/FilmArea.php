@@ -10,7 +10,7 @@ class FilmArea extends Model
     use HasFactory;
 
     public function movie() {
-        return $this->belongsTo(Movie::class);
+        return $this->HasMany(Movie::class);
     }
 
     protected $fillable = [

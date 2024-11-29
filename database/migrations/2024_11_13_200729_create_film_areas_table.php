@@ -14,8 +14,6 @@ return new class extends Migration
         Schema::create('film_areas', function (Blueprint $table) {
             $table->id();
             $table->string('area');
-            $table->unsignedBigInteger('movie_id');
-            $table->foreign('movie_id')->references('id')->on('movies');
             $table->timestamps();
         });
     }

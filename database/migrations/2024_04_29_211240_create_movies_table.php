@@ -20,6 +20,8 @@ return new class extends Migration
             $table->longText('content');
             $table->date('releaseDate');
             $table->integer('duration');
+            $table->foreignId('typeId')->constrained('type');
+            $table->foreignId('areaId')->constrained('area');
             $table->timestamps();
         });
     }
