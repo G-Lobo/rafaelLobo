@@ -1,7 +1,7 @@
 @extends('layouts.rafaelLobo')
 
 @section('header')
-header
+<x-headerHome/>
 @endsection
 
 @section('content')
