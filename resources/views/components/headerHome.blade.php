@@ -1,3 +1,4 @@
+<div class=" absolute">
 <div class="flex flex-row justify-between pt-7 px-9">
     <div class="flex">
         <h1 class="font-black text-5xl">RAFAEL LOBO</h1>
@@ -23,5 +24,7 @@
             </h2>
         </div>
     </div>
-
 </div>
+</div>
+
+
