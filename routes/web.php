@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ADMPannelController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
@@ -42,6 +43,19 @@ Route::middleware('auth', 'verified')->group(function () {
 });
 
 Route::get('/blog/{blogPost}', [BlogPostController::class, 'show'])->name('blog.show');
+
+
+/* Rotas About */
+Route::get('/about', [ProfileController::class, 'index'])->name('about.index');
+
+Route::middleware('auth', 'verified')->group(function () {
+    Route::get('/about/create', [AboutController::class, 'create'])->name('about.create');
+    Route::post('/about', [AboutController::class, 'store'])->name('about.store');
+    Route::get('/about/{about}/edit', [AboutController::class, 'edit'])->name('about.edit');
+    Route::put('/about/{about}', [AboutController::class, 'update'])->name('about.update');
+    Route::delete('/about/{about}', [AboutController::class, 'destroy'])->name('about.delete');
+});
+
 
 
 /* Rota do painel de administrador */

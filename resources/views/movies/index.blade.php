@@ -14,7 +14,8 @@
 @endif
 
     @foreach ($movies as $movie)
-        <br>
+        <div>
+    <br>
         {{ $movie->id }}
         {{ $movie->title }}
         <br>
@@ -31,6 +32,7 @@
         <img src="assets/img/coverArts/{{ $movie->coverArt }}" alt="">
 
         <br>
+    </div>
     @endforeach
 @endsection
 

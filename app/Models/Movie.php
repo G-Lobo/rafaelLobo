@@ -32,7 +32,7 @@ class Movie extends Model
         'link',
         'videoLink',
         'duration',
-        'type_id',
+        /* 'type_id', */
 
     ];
 

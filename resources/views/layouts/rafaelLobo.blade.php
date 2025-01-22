@@ -8,8 +8,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&display=swap" rel="stylesheet">
 
     <style>.font-mont {font-family:'Montserrat',sans-serif;}</style>
+    <style>.font-heebo {font-family: 'Heebo',sans-serif;}</style>
 
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -18,11 +20,11 @@
 
 </head>
 <body class="font-mont">
-    <header>
+    <header class=" absolute">
         @yield('header')
     </header>
 
-    <main>
+    <main class="min-h-screen">
         @yield('content')
     </main>
 
