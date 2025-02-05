@@ -27,8 +27,11 @@ Route::get('/filmes/{movie}', [MovieController::class, 'show'])->name('movies.sh
 
 /* Rotas de area de atuaçao no filme */
 Route::middleware('auth','verified')->group(function () {
-    Route::get('/area', [FilmAreaController::class, 'store'])->name('area.create');
-    Route::delete('/area/{area}', [FilmAreaController::class, 'destroy'])->name('area.destroy');
+    Route::get('/area/create ', [FilmAreaController::class, 'create'])->name('area.create');
+    Route::post('/area', [FilmAreaController::class, 'store'])->name('area.store');
+    Route::get('area/{filmArea}/edit',[FilmAreaController::class, 'edit'])->name('area.edit');
+    Route::put('area/{filmArea}',[FilmAreaController::class, 'update'])->name('area.update');
+    Route::delete('/area/{filmArea}', [FilmAreaController::class, 'destroy'])->name('area.destroy');
 });
 
 /* Blog Posts */

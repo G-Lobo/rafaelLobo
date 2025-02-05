@@ -20,10 +20,19 @@
 {{$post->releaseDate}}
 <br>
 <br>
+{{$type->type}}
+<br>
+<br>
 {{$post->content}}
 <br>
 <br>
 {{$post->duration}} minutos
+<br>
+<br>
+@foreach($post->filmAreas as $area)
+    <p>{{ $area->area }}</p>
+@endforeach
+
 <br>
 <br>
 <img src="/assets/img/coverArts/{{$post->coverArt}}" alt="">
@@ -35,6 +44,7 @@
 @foreach ($post->prizes as $prize)
     <img src="{{asset('assets/img/prizes/'. $prize->image) }}" alt="">
 @endforeach
+
 
 
 @section('footer')

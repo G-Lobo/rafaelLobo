@@ -28,17 +28,11 @@ class FilmAreaController extends Controller
      */
     public function store(Request $request)
     {
-        $filmArea = new FilmArea();
+        $area = new FilmArea();
 
-        $request->validate([
-            'area' => ['required'],
-        ]);
+        $area->area = $request->area;
 
-        $filmArea->area = $request->area;
-
-        $filmArea->save();
-
-        return redirect()->back()->with('success', 'Categoria criada');
+        $area->save();
     }
 
     /**
@@ -70,8 +64,6 @@ class FilmAreaController extends Controller
      */
     public function destroy(FilmArea $filmArea)
     {
-        FilmArea::findOrFail($filmArea->id)->delete();
-    
-        return redirect()->back()->with('success', 'categoria deletada');
+        //
     }
 }

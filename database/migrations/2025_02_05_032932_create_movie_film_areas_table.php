@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -12,18 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('film_types', function (Blueprint $table) {
+        Schema::create('movie_film_areas', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
+            $table->foreignId('movie_id')->constrained('movies')->onDelete('cascade');
+            $table->foreignId('film_area_id')->constrained('film_areas')->onDelete('cascade');
             $table->timestamps();
         });
-
-        // Insert predefined film types
-        DB::table('film_types')->insert([
-            ['id' => 1, 'type' => 'Curta'],
-            ['id' => 2, 'type' => 'Longa'],
-            ['id' => 3, 'type' => 'Documentario'],
-        ]);
     }
 
     /**
@@ -31,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('film_types');
+        Schema::dropIfExists('movie_film_areas');
     }
 };

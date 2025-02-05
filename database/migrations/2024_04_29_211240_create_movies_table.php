@@ -20,8 +20,7 @@ return new class extends Migration
             $table->longText('content');
             $table->date('releaseDate');
             $table->integer('duration');
-            /* $table->foreignId('typeId')->constrained('type')->nullable();
-            $table->foreignId('areaId')->constrained('area')->nullable(); */
+            $table->foreignId('typeId')->constrained('film_types')->nullable();
             $table->timestamps();
         });
     }

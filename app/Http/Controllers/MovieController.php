@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Movie;
 use App\Models\Prize;
+use App\Models\FilmType; // Import FilmType model
+use App\Models\FilmArea; // Import FilmArea model
 use Illuminate\Http\Request;
 
 class MovieController extends Controller
@@ -23,16 +25,17 @@ class MovieController extends Controller
      */
     public function create()
     {
-        return view('movies.create');
+        $filmTypes = FilmType::all(); // Fetch film types
+        $filmAreas = FilmArea::all();
+        return view('movies.create', compact('filmTypes', 'filmAreas'));
     }
+
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        $movie = new Movie();
-
         $request->validate([
             'title' => ['required'],
             'releaseDate' => ['required'],
@@ -40,25 +43,25 @@ class MovieController extends Controller
             'coverArt' => ['required'],
             'duration'  => ['required'],
             'link' => ['nullable','url','regex:/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be|vimeo\.com)\/.+$/'],
+
         ]);
 
+        $movie = new Movie();
         $movie->title = $request->title;
         $movie->releaseDate = $request->releaseDate;
         $movie->content = $request->content;
         $movie->coverArt = $request->coverArt;
         $movie->duration = $request->duration;
         $movie->link = $request->link;
+        $movie->typeId = $request->typeId; // Assign typeId
+
 
         //upload coverArt image
         if ($request->hasFile('coverArt') && $request->file('coverArt')->isValid()) {
-
             $requestImage = $request->coverArt;
-
             $extension = $requestImage->extension();
-
             $imageName = md5($requestImage->getClientOriginalName() . strtotime('now')) . "." . $extension;
             $requestImage->move(public_path('assets/img/coverArts'), $imageName);
-
             $movie->coverArt = $imageName;
         }
 
@@ -72,22 +75,20 @@ class MovieController extends Controller
         //save
         $movie->save();
 
+        if ($request->has('film_areas')) {
+            $movie->filmAreas()->sync($request->input('film_areas'));
+        }
+
         //upload Prizes images
-
         if ($request->hasFile('prizes')) {
-
             for ($i = 0; $i < count($request->allFiles()['prizes']); $i++) {
-
                 $file = $request->allFiles()['prizes'][$i];
-
                 $extension = $file->extension();
-
                 $imageName = md5($file->getClientOriginalName() . strtotime('now')) . "." . $extension;
                 $prize = new Prize();
                 $prize->movie_id = $movie->id;
                 $file->move(public_path('assets/img/prizes'), $imageName);
                 $prize->image = $imageName;
-                // dd($imageName);
                 $prize->save();
             }
         }
@@ -95,14 +96,17 @@ class MovieController extends Controller
         return redirect()->route('movies.index')->with('success', 'Postagem criada');
     }
 
+    // Other methods remain unchanged...
+
     /**
      * Display the specified resource.
      */
     public function show(Movie $movie)
     {
         $post = Movie::findOrFail($movie->id);
+        $type = FilmType::findOrFail($movie->typeId);
 
-        return view('movies.show', compact('post'));
+        return view('movies.show', compact('post', 'type'));
     }
 
     /**

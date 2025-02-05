@@ -18,11 +18,9 @@ class Movie extends Model
         return $this->belongsTo(FilmType::class);
     }
 
-    public function filmArea() {
-        return $this->belongsToMany(FilmArea::class);
+    public function filmAreas() {
+        return $this->belongsToMany(FilmArea::class, 'movie_film_areas');
     }
-
-
 
     protected $fillable = [
         'title',
@@ -32,7 +30,7 @@ class Movie extends Model
         'link',
         'videoLink',
         'duration',
-        /* 'type_id', */
+        'typeId',
 
     ];
 
