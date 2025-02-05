@@ -1,17 +1,5 @@
-adicionar taxonomia ao banco
-    ->filmes
-        ->Model FilmType
-            ->tipo ->"type" String
-                ->popular type com Longa;Curta;Animação;Video Arte
-        ->Filme has one FilmType
+adicionar a logica de update nos filmes e fazer as views relativas a eles e a lista de filme_area
 
-        ->Model FilmArea
-            ->area ->"area" String
-            ->FilmArea Controller
-        ->Filme has many FilmArea
-
-
-adicionar novos campos nas paginas de create update
 
 filtrar filmes por tipo e area na pagina de index de filmes
 

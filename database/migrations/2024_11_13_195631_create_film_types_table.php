@@ -23,6 +23,7 @@ return new class extends Migration
             ['id' => 1, 'type' => 'Curta'],
             ['id' => 2, 'type' => 'Longa'],
             ['id' => 3, 'type' => 'Documentario'],
+            ['id' => 4, 'type' => 'Animação'],
         ]);
     }
 
