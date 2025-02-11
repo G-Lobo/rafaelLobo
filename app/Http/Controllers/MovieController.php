@@ -43,7 +43,7 @@ class MovieController extends Controller
             'coverArt' => ['required'],
             'duration'  => ['required'],
             'link' => ['nullable','url','regex:/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be|vimeo\.com)\/.+$/'],
-
+            'typeId' => ['required'],
         ]);
 
         $movie = new Movie();
@@ -115,8 +115,10 @@ class MovieController extends Controller
     public function edit(Movie $movie)
     {
         $post = Movie::findOrFail($movie->id);
+        $filmTypes = FilmType::all(); // Fetch film types
+        $filmAreas = FilmArea::all();
 
-        return view('movies.edit', compact('post'));
+        return view('movies.edit', compact('post', 'filmTypes', 'filmAreas'));
     }
 
     /**
@@ -176,6 +178,10 @@ class MovieController extends Controller
                     }
                 }
             }
+        }
+
+        if ($request->has('film_areas')) {
+            $movie->filmAreas()->sync($request->input('film_areas'));
         }
 
         Movie::findOrFail($movie->id)->update($data);

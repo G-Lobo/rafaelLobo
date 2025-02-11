@@ -1,5 +1,3 @@
-adicionar a logica de update nos filmes e fazer as views relativas a eles e a lista de filme_area
-
 
 filtrar filmes por tipo e area na pagina de index de filmes
 

@@ -78,6 +78,24 @@ edit
         </div>
 
         <div>
+            <label for="link">Tipo do filme:</label>
+            <select id="typeId" name="typeId" placeholder="Curta" value="{{old('typeId')}}">
+                @foreach ($filmTypes as $filmType)
+                    <option value="{{ $filmType->id }}">{{ $filmType->type }}</option>
+                @endforeach
+                </select>
+        </div>
+
+        <div class="form-group">
+            <label for="film_areas">Áreas de Participação</label>
+            <select name="film_areas[]" id="film_areas" class="form-control" multiple>
+                @foreach($filmAreas as $area)
+                    <option value="{{ $area->id }}">{{ $area->area }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div>
 
             <button type="submit" class="rounded-md bg-green-600">criar</button>
             <a href="{{ route('blog.index') }}">voltar</a>
