@@ -12,7 +12,7 @@
 
     <style>.font-mont {font-family:'Montserrat',sans-serif;}</style>
     <style>.font-heebo {font-family: 'Heebo',sans-serif;}</style>
-
+    <style>ion-icon {font-size: 32px;}</style>
     <script src="https://cdn.tailwindcss.com"></script>
 
     <title>Rafael Lobo</title>
@@ -20,7 +20,7 @@
 
 </head>
 <body class="font-mont">
-    <header class=" absolute">
+    <header class="">
         @yield('header')
     </header>
 
@@ -33,5 +33,8 @@
     </footer>
 
 
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
