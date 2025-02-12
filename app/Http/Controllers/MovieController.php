@@ -13,11 +13,20 @@ class MovieController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $movies = Movie::all();
+        $query = Movie::query();
 
-        return view('movies.index', compact('movies'));
+    if ($request->has('area_id') && !empty($request->area_id)) {
+        $query->whereHas('filmAreas', function ($q) use ($request) {
+            $q->where('film_area_id', $request->area_id);
+        });
+    }
+
+    $movies = $query->get();
+    $filmAreas = FilmArea::all();
+
+    return view('movies.index', compact('movies', 'filmAreas'));
     }
 
     /**

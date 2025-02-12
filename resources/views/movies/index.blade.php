@@ -12,6 +12,18 @@
         {{ session('success') }}
     </div>
 @endif
+<form method="GET" action="{{ route('movies.index') }}">
+    <label for="area_id">Filtrar por Área:</label>
+    <select name="area_id" id="area_id" onchange="this.form.submit()">
+        <option value="">Todas as Áreas</option>
+        @foreach($filmAreas as $area)
+            <option value="{{ $area->id }}" {{ request('area_id') == $area->id ? 'selected' : '' }}>
+                {{ $area->area }}
+            </option>
+        @endforeach
+    </select>
+</form>
+
 
     @foreach ($movies as $movie)
         <div>
