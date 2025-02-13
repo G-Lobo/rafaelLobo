@@ -49,7 +49,7 @@ Route::get('/blog/{blogPost}', [BlogPostController::class, 'show'])->name('blog.
 
 
 /* Rotas About */
-Route::get('/about', [ProfileController::class, 'index'])->name('about.index');
+Route::get('/about', [AboutController::class, 'index'])->name('about.index');
 
 Route::middleware('auth', 'verified')->group(function () {
     Route::get('/about/create', [AboutController::class, 'create'])->name('about.create');

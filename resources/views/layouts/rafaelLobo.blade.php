@@ -19,7 +19,7 @@
 
 
 </head>
-<body class="font-mont">
+<body class="font-mont bg-gray-200">
     <header class="">
         @yield('header')
     </header>
