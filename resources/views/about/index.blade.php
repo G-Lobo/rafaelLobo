@@ -6,8 +6,6 @@
 
 @section('content')
 
-<!-- About Section -->
-
 <div class= "bg-transparent py-64">
     <div class="container mx-auto px-56">
         <div class="flex flex-col md:flex-row items-center space-y-8 md:space-y-0 md:space-x-12">
@@ -39,8 +37,7 @@
     </div>
 </div>
 
-
-
+trabalhos recentes
 
 @foreach ($movies as $movie)
 <p>{{ $movie->title }}</p>
@@ -52,13 +49,10 @@
 @endforeach
 @endforeach
 
-
-
-
 @endsection
 
 @section('footer')
+
 <x-footer/>
 
 @endsection
-</div>
