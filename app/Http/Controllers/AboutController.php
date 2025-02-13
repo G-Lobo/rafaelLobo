@@ -6,6 +6,7 @@ use App\Models\About;
 use App\Models\Movie;
 use App\Models\FilmArea;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class AboutController extends Controller
 {
@@ -14,7 +15,6 @@ class AboutController extends Controller
      */
     public function index()
     {
-        //$movies = Movie::orderBy('created_at', 'desc');
         $movies = Movie::latest()->take(2)->get();
         $filmAreas = FilmArea::all();
 
