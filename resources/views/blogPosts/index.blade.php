@@ -6,6 +6,7 @@
 
 @section('content')
     index
+
     @if (session('success'))
     <div>
         {{ session('success') }}
