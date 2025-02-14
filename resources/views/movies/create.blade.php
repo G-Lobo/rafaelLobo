@@ -48,8 +48,41 @@ create
 </div>
 
 <div>
+    {{-- <label for="content">Conteúdo:</label>
+    <textarea name="content" id="content" cols="30" rows="10">{{old('content')}}</textarea> --}}
     <label for="content">Conteúdo:</label>
-    <textarea name="content" id="content" cols="30" rows="10">{{old('content')}}</textarea>
+            <div id="quill-editor" class="mb-3" style="height: 300px;">
+            </div>
+            <textarea rows="3" class="mb-3 hidden" name="content" id="quill-editor-area">{{ old('content') }}</textarea>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    if (document.getElementById('quill-editor-area')) {
+                        var editor = new Quill('#quill-editor', {
+                            modules: {
+                                toolbar: [
+                                    ['bold', 'italic', 'underline', 'strike'],
+                                    ['link', 'blockquote', 'align'],
+                                    [{
+                                        list: 'ordered'
+                                    }, {
+                                        list: 'bullet'
+                                    }],
+                                ],
+                            },
+                            theme: 'snow'
+                        });
+                        var quillEditor = document.getElementById('quill-editor-area');
+                        editor.on('text-change', function() {
+                            quillEditor.value = editor.root.innerHTML;
+                        });
+
+                        quillEditor.addEventListener('input', function() {
+                            editor.root.innerHTML = quillEditor.value;
+                        });
+                    }
+                });
+            </script>
+
 </div>
 
 <div>

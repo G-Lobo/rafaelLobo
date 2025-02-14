@@ -38,8 +38,51 @@
             </div>
 
             <div>
-                <label for="content">Conteúdo:</label>
-                <textarea name="content" id="content" cols="30" rows="10">@if (old('content') == null) {{$post->content}} @else {{old('content')}} @endif </textarea>
+                <div>
+                    <label for="content">Conteúdo:</label>
+                    <!-- Editor Quill -->
+                    <div id="quill-editor" class="mb-3" style="height: 300px;"></div>
+                    <!-- Input oculto para armazenar o valor do Quill -->
+                    <textarea name="content" id="quill-editor-area" class="hidden">{{ old('content', $post->content) }}</textarea>
+                </div>
+                <!-- QuillJS e Script -->
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        var quillEditorArea = document.getElementById('quill-editor-area');
+
+                        if (quillEditorArea) {
+                            var editor = new Quill('#quill-editor', {
+                                modules: {
+                                    toolbar: [
+                                        ['bold', 'italic', 'underline', 'strike'],
+                                        ['link', 'blockquote', 'align'],
+                                        [{
+                                            list: 'ordered'
+                                        }, {
+                                            list: 'bullet'
+                                        }],
+                                    ],
+                                },
+                                theme: 'snow'
+                            });
+
+                            // Carregar o conteúdo salvo no Quill Editor
+                            var content = quillEditorArea.value;
+                            editor.root.innerHTML = content;
+
+                            // Atualizar textarea oculto ao digitar no Quill
+                            editor.on('text-change', function() {
+                                quillEditorArea.value = editor.root.innerHTML;
+                            });
+
+                            // Se o usuário editar o textarea diretamente, atualizar o Quill
+                            quillEditorArea.addEventListener('input', function() {
+                                editor.root.innerHTML = quillEditorArea.value;
+                            });
+                        }
+                    });
+                </script>
+
             </div>
 
             <div>

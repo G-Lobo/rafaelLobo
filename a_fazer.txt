@@ -1,6 +1,3 @@
-
-filtrar filmes por tipo e area na pagina de index de filmes
-
 criar model ArtCollection
     ->Coleção
         ->nome ->"collectionName" String
@@ -43,8 +40,6 @@ sudo nano /etc/php/*/fpm/php.ini
 php -i | grep post_max_size ->10M
 php -i | grep upload_max_filesize ->12M
 
-tentar adicionar o quill para o input de texto
-https://www.interviewsolutionshub.com/blog/how-to-use-quill-rich-text-editor-laravel
 
 
 frontend
