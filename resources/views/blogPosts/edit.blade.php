@@ -1,51 +1,43 @@
 @extends('layouts.rafaelLobo')
 
 @section('header')
-    header
+    <x-header-general/>
 @endsection
 
 @section('content')
-    edit
+    <div class="max-w-4xl mx-auto p-8 bg-gray-100 shadow-lg rounded-xl mt-8">
+        <h2 class="text-3xl font-bold mb-6 text-gray-800">Editar Post</h2>
 
+        @if ($errors->any())
+            <div class="bg-red-200 text-red-900 p-4 rounded-lg mb-6 border border-red-400">
+                <ul class="list-disc pl-5">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
-    {{-- mensagens de erro das validaçoes --}}
-
-    @error('title')
-        <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    @error('content')
-        <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    @error('link')
-        <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-
-    <div>
-
-        <form action="{{ route('blog.update', [$post->id]) }}" method="POST">
+        <form action="{{ route('blog.update', [$post->id]) }}" method="POST" class="space-y-6">
             @csrf
             @method('DELETE')
-            <button type="submit">Deletar</button>
+            <button type="submit" class="bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition font-medium shadow-lg">Deletar</button>
         </form>
 
-        <form action="/blog/{{ $post->id }}" method="POST" enctype="multipart/form-data">
+        <form action="/blog/{{ $post->id }}" method="POST" enctype="multipart/form-data" class="space-y-6">
             @csrf
             @method('PUT')
+
             <div>
-                <label for="title">Título do post:</label>
-                <input type="text" name="title" id="title"
-                    value="@if (old('title') == null) {{ $post->title }} @else {{ old('title') }} @endif">
+                <label for="title" class="block text-lg font-medium text-gray-700">Título do Post:</label>
+                <input type="text" name="title" id="title" value="{{ old('title', $post->title) }}"
+                    class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white shadow-sm">
             </div>
 
             <div>
-                <div>
-                    <label for="content">Conteúdo:</label>
-                    <!-- Editor Quill -->
-                    <div id="quill-editor" class="mb-3" style="height: 300px;"></div>
-                    <!-- Input oculto para armazenar o valor do Quill -->
-                    <textarea name="content" id="quill-editor-area" class="hidden">{{ old('content', $post->content) }}</textarea>
-                </div>
-                <!-- QuillJS e Script -->
+                <label for="content" class="block text-lg font-medium text-gray-700">Conteúdo:</label>
+                <div id="quill-editor" class="h-48 border rounded-lg bg-white p-3"></div>
+                <textarea name="content" id="quill-editor-area" class="hidden">{{ old('content', $post->content) }}</textarea>
                 <script>
                     document.addEventListener('DOMContentLoaded', function() {
                         var quillEditorArea = document.getElementById('quill-editor-area');
@@ -82,35 +74,33 @@
                         }
                     });
                 </script>
-
             </div>
 
             <div>
-                <label for="image">Imagem do Post:</label>
-                <img src="/assets/img/blogImages/{{ $post->image }}" alt="">
-                <input type="file" id="image" name="image">
+                <label for="image" class="block text-lg font-medium text-gray-700">Imagem do Post:</label>
+                <img src="/assets/img/blogImages/{{ $post->image }}" alt="" class="w-full max-w-xs rounded-lg mb-3">
+                <input type="file" id="image" name="image" class="w-full border p-3 rounded-lg bg-white">
             </div>
 
             <div>
-                <label for="pdf">pdf:</label>
-                <input type="file" id="pdf" name="pdf" value="{{old('pdf')}}">
+                <label for="pdf" class="block text-lg font-medium text-gray-700">PDF:</label>
+                <input type="file" id="pdf" name="pdf" class="w-full border p-3 rounded-lg bg-white">
             </div>
 
             <div>
-                <label for="link">Vídeo:</label>
-                <input type="text" id="link" name="link" value="@if (old('link') == null) {{$post->link}} @else {{old('link')}} @endif">
+                <label for="link" class="block text-lg font-medium text-gray-700">Vídeo:</label>
+                <input type="text" id="link" name="link" value="{{ old('link', $post->link) }}"
+                    class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white shadow-sm">
             </div>
 
-            <div>
-
-                <button type="submit" class="rounded-md bg-green-600">criar</button>
-                <a href="{{ route('blog.index') }}">voltar</a>
+            <div class="flex justify-between items-center mt-6">
+                <button type="submit" class="bg-green-600 text-white py-3 px-6 rounded-lg hover:bg-green-700 transition font-medium shadow-lg">Atualizar</button>
+                <a href="{{ route('blog.index') }}" class="text-blue-600 hover:underline font-medium">Voltar</a>
             </div>
-
         </form>
     </div>
 @endsection
 
 @section('footer')
-    footer
+   <x-footer/>
 @endsection
