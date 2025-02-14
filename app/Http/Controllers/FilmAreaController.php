@@ -12,7 +12,8 @@ class FilmAreaController extends Controller
      */
     public function index()
     {
-        //
+        $filmAreas = FilmArea::all();
+        return view('filmArea.index', compact('filmAreas'));
     }
 
     /**
@@ -33,37 +34,16 @@ class FilmAreaController extends Controller
         $area->area = $request->area;
 
         $area->save();
-    }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(FilmArea $filmArea)
-    {
-        //
+        return redirect()->route('filmArea.index')->with('success');
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(FilmArea $filmArea)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, FilmArea $filmArea)
-    {
-        //
-    }
-
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(FilmArea $filmArea)
     {
-        //
+        FilmArea::findOrFail($filmArea->id)->delete();
+
+        return redirect()->route('area.indexADM')->with('success', 'Postagem deletada');
     }
 }

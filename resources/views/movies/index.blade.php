@@ -5,6 +5,20 @@
 @endsection
 
 @section('content')
+
+<form method="GET" action="{{ route('movies.index') }}">
+    <label for="area_id">Filtrar por Área:</label>
+    <select name="area_id" id="area_id" onchange="this.form.submit()">
+        <option value="">Todas as Áreas</option>
+        @foreach($filmAreas as $area)
+            <option value="{{ $area->id }}" {{ request('area_id') == $area->id ? 'selected' : '' }}>
+                {{ $area->area }}
+            </option>
+        @endforeach
+    </select>
+</form>
+
+
 <div class="container mx-auto px-32 pr-16 pt-4 pb-16">
     <h2 class="text-4xl font-black text-start mx-auto mb-2 pt-8 pb-8">FILMES</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -41,6 +55,7 @@
             </a>
             @endforeach
         </div>
+
     </div>
 @endsection
 

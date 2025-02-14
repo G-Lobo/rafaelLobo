@@ -1,7 +1,7 @@
 @extends('layouts.rafaelLobo')
 
 @section('header')
-    <x-header-general />
+    <x-header-general/>
 @endsection
 
 @section('content')

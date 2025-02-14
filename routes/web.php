@@ -16,6 +16,7 @@ Route::get('/', HomeController::class)->name('home');
 Route::get('/filmes', [MovieController::class, 'index'])->name('movies.index');
 
 Route::middleware('auth', 'verified')->group(function () {
+    Route::get( '/filmes/adm', [MovieController::class, 'indexADM'])->name('movies.indexADM');
     Route::get('/filmes/create', [MovieController::class, 'create'])->name('movies.create');
     Route::post('/filmes', [MovieController::class, 'store'])->name('movies.store');
     Route::get('/filmes/{movie}/edit', [MovieController::class, 'edit'])->name('movies.edit');
@@ -27,7 +28,8 @@ Route::get('/filmes/{movie}', [MovieController::class, 'show'])->name('movies.sh
 
 /* Rotas de area de atuaçao no filme */
 Route::middleware('auth','verified')->group(function () {
-    Route::get('/area/create ', [FilmAreaController::class, 'create'])->name('area.create');
+    Route::get('/area', [FilmAreaController::class, 'index'])->name('area.index');
+    Route::get('/area/create', [FilmAreaController::class, 'create'])->name('area.create');
     Route::post('/area', [FilmAreaController::class, 'store'])->name('area.store');
     Route::get('area/{filmArea}/edit',[FilmAreaController::class, 'edit'])->name('area.edit');
     Route::put('area/{filmArea}',[FilmAreaController::class, 'update'])->name('area.update');
@@ -38,6 +40,7 @@ Route::middleware('auth','verified')->group(function () {
 Route::get('/blog', [BlogPostController::class, 'index'])->name('blog.index');
 
 Route::middleware('auth', 'verified')->group(function () {
+    Route::get('/blog/adm', [BlogPostController::class , 'indexADM'])->name('blog.indexADM');
     Route::get('/blog/create', [BlogPostController::class, 'create'])->name('blog.create');
     Route::post('/blog', [BlogPostController::class, 'store'])->name('blog.store');
     Route::get('/blog/{blogPost}/edit', [BlogPostController::class, 'edit'])->name('blog.edit');
