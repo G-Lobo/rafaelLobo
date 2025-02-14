@@ -1,7 +1,7 @@
 <div class="flex justify-between px-6 py-6 bg-white">
 
     <!-- Left Side Links -->
-    <div>
+    <div class="flex flex-col align-middle pt-5">
         <h1 class="font-black text-2xl text-black">RAFAEL LOBO</h1>
 
         <div>

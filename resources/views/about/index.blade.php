@@ -6,7 +6,7 @@
 
 @section('content')
 
-<div class= "bg-transparent py-64">
+<div class= "bg-transparent pt-48 pb-16">
     <div class="container mx-auto px-56">
         <div class="flex flex-col md:flex-row items-center space-y-8 md:space-y-0 md:space-x-12">
             <!-- Text Content -->
@@ -24,30 +24,45 @@
             </div>
 
             <!-- Profile Picture with CV Box -->
-            <div class="w-full md:w-1/3 flex justify-center relative ">
+            <div class="w-full md:w-1/3 flex flex-col justify-center relative ">
                 <!-- Profile Picture -->
                 <img src="{{asset('assets/img/profPic/_MG_6823.jpg')}}" alt="Rafael Lobo" class="rounded-lg shadow-lg w-256 h-256 object-cover">
 
                 <!-- CV Box -->
-                <a href="#" class="absolute -bottom-4 right-0 bg-red-500 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:bg-gray-200 hover:text-red-500 transition duration-300">
+                <a href="#" class="absolute -bottom-0 right-0 bg-red-500 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:bg-gray-200 hover:text-red-500 transition duration-300">
                     CV
                 </a>
+
+                <div class="pt-4 justify-start">
+                    <x-social-icons/>
+                </div>
+
             </div>
+
         </div>
     </div>
 </div>
 
-trabalhos recentes
 
-@foreach ($movies as $movie)
-<p>{{ $movie->title }}</p>
-<img src="assets/img/coverArts/{{ $movie->coverArt }}" alt="">
-<p>{{ $movie->title }}</p>
-<p>{{ $movie->title }}</p>
-@foreach($movie->filmAreas as $area)
-    <p>{{ $area->area }}</p>
-@endforeach
-@endforeach
+
+<h2 class="text-4xl font-black text-center mb-4">Trabalhos Recentes</h2>
+<div class="container mx-auto px-4 pt-16 pb-32">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        @foreach ($movies as $movie)
+            <div class="flex flex-col items-center bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105">
+                <div class="w-full h-full">
+                    <img src="{{ asset('assets/img/coverArts/' . $movie->coverArt) }}" alt="{{ $movie->title }}" class="w-full h-full object-cover">
+                </div>
+                <div class="p-4">
+                    <h3 class="text-xl font-semibold text-center text-gray-800">{{ $movie->title }}</h3>
+                    @foreach($movie->filmAreas as $area)
+                        <p class="text-center text-gray-600">{{ $area->area }}</p>
+                    @endforeach
+                </div>
+            </div>
+        @endforeach
+    </div>
+</div>
 
 @endsection
 
