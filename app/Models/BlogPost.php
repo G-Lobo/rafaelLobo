@@ -19,6 +19,5 @@ class BlogPost extends Model
         'pdf',
     ];
 
-
     protected $guarded = [];
 }

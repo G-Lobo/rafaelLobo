@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="container mx-auto px-64 py-8">
+    <div class="container mx-auto px-64 pt-8">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <!-- Poster Image -->
             <div class="flex justify-between h-max">
@@ -41,21 +41,24 @@
                 <div class="prose max-w-none mb-4">
                     {!! $post->content !!}
                 </div>
-                <!-- Prizes -->
-                @if ($post->prizes->isNotEmpty())
-                    <div class="flex flex-wrap space-x-4 mb-4">
-                        @foreach ($post->prizes as $prize)
-                            <img src="{{ asset('assets/img/prizes/' . $prize->image) }}" alt="{{ $prize->name }}" class="w-24 h-16 object-cover rounded-lg">
-                        @endforeach
-                    </div>
-                @endif
             </div>
         </div>
     </div>
 
+    <div class="container mx-auto px-64 py-8">
+        <!-- Prizes -->
+        @if ($post->prizes->isNotEmpty())
+        <div class="flex flex-wrap space-x-4 mb-4">
+            @foreach ($post->prizes as $prize)
+                <img src="{{ asset('assets/img/prizes/' . $prize->image) }}" alt="{{ $prize->name }}" class="w-32 h-28 object-cover rounded-lg">
+            @endforeach
+        </div>
+    @endif
+    </div>
+
     <!-- Video Player -->
     @if ($post->videoLink)
-        <div class="container mx-auto px-64 py-8">
+        <div class="container mx-auto px-64 pb-8">
             <div class="aspect-video">
                 <iframe src="{{ $post->videoLink }}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen class="w-full h-full rounded-lg shadow-lg"></iframe>
             </div>

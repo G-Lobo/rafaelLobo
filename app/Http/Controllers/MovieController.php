@@ -148,7 +148,7 @@ class MovieController extends Controller
             'title' => ['required'],
             'releaseDate' => ['required'],
             'content' => ['required'],
-            'coverArt' => ['required'],
+            'coverArt' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
             'duration'  => ['required'],
             'link' => ['nullable', 'url', 'regex:/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be|vimeo\.com)\/.+$/'],
             'typeId' => ['required']
@@ -161,6 +161,14 @@ class MovieController extends Controller
             $imageName = md5($requestImage->getClientOriginalName() . strtotime('now')) . "." . $extension;
             $requestImage->move(public_path('assets/img/coverArts'), $imageName);
             $data['coverArt'] = $imageName;
+
+            // Remover a imagem antiga (opcional)
+            if ($movie->coverArt && file_exists(public_path('assets/img/coverArts/' . $movie->coverArt))) {
+                unlink(public_path('assets/img/coverArts/' . $movie->coverArt));
+            }
+        } else {
+            // Mantém a imagem antiga
+            $data['coverArt'] = $movie->coverArt;
         }
 
         //update de video
