@@ -1,4 +1,4 @@
-<div class="sticky w-full">
+<div class="absolute w-full">
     <div class="flex flex-col md:flex-row items-center justify-between pt-7 px-9 w-full">
         <!-- Left Side: RAFAEL LOBO and Icon -->
         <div class="flex items-center space-x-4">

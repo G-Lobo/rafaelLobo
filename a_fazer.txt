@@ -1,4 +1,4 @@
-merge
+testeeeeeee
 
 filtrar filmes por tipo e area na pagina de index de filmes
 
@@ -39,6 +39,10 @@ criar model Bio
 
 logica para trabalhos recentes(ou featured works -tirar essa duvida com o rafael-) aparecerem na pagina de bio pegando trabalhos dos bancos de filmes e de artes
 
+ao upar site
+sudo nano /etc/php/*/fpm/php.ini
+php -i | grep post_max_size ->10M
+php -i | grep upload_max_filesize ->12M
 
 tentar adicionar o quill para o input de texto
 https://www.interviewsolutionshub.com/blog/how-to-use-quill-rich-text-editor-laravel

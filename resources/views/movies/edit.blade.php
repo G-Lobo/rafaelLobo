@@ -27,10 +27,16 @@ edit
 @error('link')
 <div class="alert alert-danger">{{ $message }}</div>
 @enderror
+@error('typeId')
+<div class="alert alert-danger">{{ $message }}</div>
+@enderror
+@error('film_areas')
+<div class="alert alert-danger">{{ $message }}</div>
+@enderror
 
 <div>
 
-    <form action="{{ route('movies.destroy', [$post->id]) }}" method="POST">
+    <form action="{{ route('movies.destroy', [$post->id]) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja deletar este item?');">
         @csrf
         @method('DELETE')
         <button type="submit">Deletar</button>
@@ -46,7 +52,9 @@ edit
 
         <div>
             <label for="duration">Duração do filme em minutos:</label>
-            <input type="number" name="duration" id="duration" value="@if (old('duration') == null) {{ $post->duration }} @else {{old('duration')}} @endif">
+            {{--<input type="number" name="duration" id="duration" value="@if (old('duration') == null) {{ $post->duration }} @else {{old('duration')}} @endif">  --}}
+
+            <input type="number" name="duration" id="duration" value="{{old('duration', $post->duration)}}">
         </div>
 
         <div>
@@ -81,7 +89,7 @@ edit
             <label for="link">Tipo do filme:</label>
             <select id="typeId" name="typeId" placeholder="Curta" value="{{old('typeId')}}">
                 @foreach ($filmTypes as $filmType)
-                    <option value="{{ $filmType->id }}">{{ $filmType->type }}</option>
+                    <option value="{{ $filmType->id }}" {{ old('typeId', $post->typeId) == $filmType->id ? 'selected' : '' }}>{{ $filmType->type }}</option>
                 @endforeach
                 </select>
         </div>
@@ -90,7 +98,10 @@ edit
             <label for="film_areas">Áreas de Participação</label>
             <select name="film_areas[]" id="film_areas" class="form-control" multiple>
                 @foreach($filmAreas as $area)
-                    <option value="{{ $area->id }}">{{ $area->area }}</option>
+                    <option value="{{ $area->id }}"
+                        @if(in_array($area->id, old('film_areas', $post->filmAreas->pluck('id')->toArray())))
+                        selected
+                    @endif>{{ $area->area }}</option>
                 @endforeach
             </select>
         </div>

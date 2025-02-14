@@ -7,11 +7,7 @@
 @section('content')
     index
 
-    @if (session('success'))
-    <div>
-        {{ session('success') }}
-    </div>
-@endif
+
 
     @foreach ($blogPosts as $post)
         <br>

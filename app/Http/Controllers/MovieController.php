@@ -17,16 +17,23 @@ class MovieController extends Controller
     {
         $query = Movie::query();
 
-    if ($request->has('area_id') && !empty($request->area_id)) {
-        $query->whereHas('filmAreas', function ($q) use ($request) {
-            $q->where('film_area_id', $request->area_id);
-        });
+        if ($request->has('area_id') && !empty($request->area_id)) {
+            $query->whereHas('filmAreas', function ($q) use ($request) {
+                $q->where('film_area_id', $request->area_id);
+            });
+        }
+
+        $movies = $query->paginate(6);
+        $filmAreas = FilmArea::all();
+
+        return view('movies.index', compact('movies', 'filmAreas'));
     }
 
-    $movies = $query->get();
-    $filmAreas = FilmArea::all();
+    public function indexADM()
+    {
+        $movies = Movie::paginate(10);
 
-    return view('movies.index', compact('movies', 'filmAreas'));
+        return view('movies.indexADM', compact('movies'));
     }
 
     /**
@@ -51,7 +58,7 @@ class MovieController extends Controller
             'content' => ['required'],
             'coverArt' => ['required'],
             'duration'  => ['required'],
-            'link' => ['nullable','url','regex:/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be|vimeo\.com)\/.+$/'],
+            'link' => ['nullable', 'url', 'regex:/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be|vimeo\.com)\/.+$/'],
             'typeId' => ['required'],
         ]);
 
@@ -62,7 +69,7 @@ class MovieController extends Controller
         $movie->coverArt = $request->coverArt;
         $movie->duration = $request->duration;
         $movie->link = $request->link;
-        $movie->typeId = $request->typeId; // Assign typeId
+        $movie->typeId = $request->typeId;
 
 
         //upload coverArt image
@@ -102,7 +109,7 @@ class MovieController extends Controller
             }
         }
 
-        return redirect()->route('movies.index')->with('success', 'Postagem criada');
+        return redirect()->route('movies.indexADM')->with('success', 'Postagem criada');
     }
 
     // Other methods remain unchanged...
@@ -143,7 +150,8 @@ class MovieController extends Controller
             'content' => ['required'],
             'coverArt' => ['required'],
             'duration'  => ['required'],
-            'link' => ['nullable','url','regex:/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be|vimeo\.com)\/.+$/'],
+            'link' => ['nullable', 'url', 'regex:/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be|vimeo\.com)\/.+$/'],
+            'typeId' => ['required']
         ]);
 
         //update de coverArt
@@ -195,7 +203,7 @@ class MovieController extends Controller
 
         Movie::findOrFail($movie->id)->update($data);
 
-        return redirect()->route('movies.index')->with('success', 'Postagem alterada');
+        return redirect()->route('movies.indexADM')->with('success', 'Postagem alterada');
     }
 
     /**
@@ -205,6 +213,6 @@ class MovieController extends Controller
     {
         Movie::findOrFail($movie->id)->delete();
 
-        return redirect()->route('movies.index')->with('success', 'Postagem deletada');
+        return redirect()->route('movies.indexADM')->with('success', 'Postagem deletada');
     }
 }

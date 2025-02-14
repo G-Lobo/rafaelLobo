@@ -9,7 +9,7 @@ create
 
 
 {{-- mensagens de erro das validaçoes --}}
-{{--@error('title')
+@error('title')
 <div class="alert alert-danger">{{ $message }}</div>
 @enderror
 @error('releaseDate')
@@ -26,8 +26,13 @@ create
 @enderror
 @error('link')
 <div class="alert alert-danger">{{ $message }}</div>
-@enderror --}}
-
+@enderror
+@error('typeId')
+<div class="alert alert-danger">{{ $message }}</div>
+@enderror
+@error('film_areas')
+<div class="alert alert-danger">{{ $message }}</div>
+@enderror
 
 
 <form action="/filmes" method="POST" enctype="multipart/form-data">
