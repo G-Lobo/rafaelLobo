@@ -6,7 +6,7 @@
 
 @section('content')
 
-<div class= "bg-transparent pt-48 pb-16">
+<div class= "bg-transparent pt-24 pb-16">
     <div class="container mx-auto px-56">
         <div class="flex flex-col md:flex-row items-center space-y-8 md:space-y-0 md:space-x-12">
             <!-- Text Content -->
