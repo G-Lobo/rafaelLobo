@@ -16,6 +16,12 @@ class BlogPostController extends Controller
         return view('blogPosts.index', compact('blogPosts'));
     }
 
+    public function indexADM()
+    {
+        $blogPosts = BlogPost::paginate(10);
+        return view('blogPosts.indexADM', compact('blogPosts'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -29,6 +35,8 @@ class BlogPostController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request->all(), $request->file('pdf'));
+
         $post = new BlogPost();
 
 
@@ -37,6 +45,7 @@ class BlogPostController extends Controller
             'content' => ['required'],
             'link' => ['nullable', 'url', 'regex:/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be|vimeo\.com)\/.+$/'],
             'image' => ['nullable'],
+            'pdf' => ['nullable', 'file', 'mimes:pdf', 'max:10240']
         ]);
 
 
@@ -45,6 +54,7 @@ class BlogPostController extends Controller
         $post->content = $request->content;
         $post->image = $request->image;
         $post->link = $request->link;
+        $post->pdf = $request->pdf;
 
         if($request->hasFile('image') && $request->file('image')->isValid()) {
 
@@ -62,10 +72,19 @@ class BlogPostController extends Controller
             $post->video = $embedLink;
         }
 
+        //upload pdf not working
+        if ($request->hasFile('pdf') && $request->file('pdf')->isValid()) {
+            $requestPDF = $request->file('pdf'); // Pegando o arquivo corretamente
+            $extension = $requestPDF->getClientOriginalExtension(); // Obtendo a extensão
+            $pdfName = md5($requestPDF->getClientOriginalName() . strtotime('now')) . "." . $extension;
+
+            $requestPDF->move(public_path('assets/pdf/posts'), $pdfName); // Movendo para a pasta correta
+            $post->pdf = $pdfName;
+        }
 
         $post->save();
 
-        return redirect()->route('blog.index')->with('success', 'Postagem criada');
+        return redirect()->route('blog.indexADM')->with('success', 'Postagem criada');
     }
 
 
@@ -101,6 +120,7 @@ class BlogPostController extends Controller
             'content' => ['required'],
             'link' => ['nullable', 'url', 'regex:/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be|vimeo\.com)\/.+$/'],
             'image' => ['nullable'],
+            'pdf' => ['nullable', 'file', 'mimes:pdf', 'max:10240'],
         ]);
 
         //update img
@@ -118,6 +138,16 @@ class BlogPostController extends Controller
             $toBeEmbed = $request->link;
             $embedLink = $this->videoEmbeder($toBeEmbed);
             $data['video'] = $embedLink;
+        }
+
+        //update pdf
+        if ($request->hasFile('pdf') && $request->file('pdf')->isValid()) {
+            $requestPDF = $request->file('pdf'); // Pegando o arquivo corretamente
+            $extension = $requestPDF->getClientOriginalExtension(); // Obtendo a extensão
+            $pdfName = md5($requestPDF->getClientOriginalName() . strtotime('now')) . "." . $extension;
+
+            $requestPDF->move(public_path('assets/pdf/posts'), $pdfName); // Movendo para a pasta correta
+            $data['pdf'] = $pdfName;
         }
 
         BlogPost::findOrFail($blogPost->id)->update($data);

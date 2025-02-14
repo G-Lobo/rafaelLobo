@@ -14,11 +14,6 @@ class ADMPannelController extends Controller
         $posts = BlogPost::orderBy('created_at', 'desc')->paginate(5);
         $movies = Movie::orderBy('created_at', 'desc')->paginate(5);
 
-
-
-
-
-
         return view('ADMPannel', compact('posts', 'movies'));
     }
 }

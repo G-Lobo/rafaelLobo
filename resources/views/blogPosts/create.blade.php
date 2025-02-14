@@ -38,6 +38,11 @@ create
 </div>
 
 <div>
+    <label for="pdf">pdf:</label>
+    <input type="file" id="pdf" name="pdf" value="{{old('pdf')}}">
+</div>
+
+<div>
     <label for="link">Vídeo:</label>
     <input type="text" id="link" name="link" value="{{old('link')}}">
 </div>

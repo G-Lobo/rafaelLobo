@@ -41,10 +41,16 @@
                 <label for="content">Conteúdo:</label>
                 <textarea name="content" id="content" cols="30" rows="10">@if (old('content') == null) {{$post->content}} @else {{old('content')}} @endif </textarea>
             </div>
+
             <div>
                 <label for="image">Imagem do Post:</label>
                 <img src="/assets/img/blogImages/{{ $post->image }}" alt="">
                 <input type="file" id="image" name="image">
+            </div>
+
+            <div>
+                <label for="pdf">pdf:</label>
+                <input type="file" id="pdf" name="pdf" value="{{old('pdf')}}">
             </div>
 
             <div>
