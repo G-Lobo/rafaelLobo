@@ -34,6 +34,10 @@ class Movie extends Model
 
     ];
 
+    protected $casts = [
+        'releaseDate' => 'date',
+    ];
+
 
     protected $guarded = [];
 }
