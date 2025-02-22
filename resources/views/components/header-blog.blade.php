@@ -4,7 +4,7 @@
         <div class="flex items-center space-x-4">
             <h1 class="font-black text-2xl text-black">
             <a href="{{ route('home') }}">PUBLICAÇÕES</a></h1>
-            <img src="{{ asset('assets/img/icon/iconeloboPreto.png') }}" alt="Icon" class="h-20 w-20">
+            <img src="{{ asset('assets/img/icon/iconeloboPreto.png') }}" alt="Icon" class="relative mb-7 h-20 w-20">
         </div>
 
         <!-- Right Side: Navigation Links -->
