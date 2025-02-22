@@ -46,6 +46,8 @@
                             var editor = new Quill('#quill-editor', {
                                 modules: {
                                     toolbar: [
+                                        [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+                                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
                                         ['bold', 'italic', 'underline', 'strike'],
                                         ['link', 'blockquote', 'align'],
                                         [{

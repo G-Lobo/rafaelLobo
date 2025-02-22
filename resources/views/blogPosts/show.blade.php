@@ -14,7 +14,7 @@
 
     <!-- Content -->
     <div class="text-gray-700 leading-relaxed">
-        {{ $post->content }}
+        {!! $post->content !!}
     </div>
 
     <!-- Image -->
