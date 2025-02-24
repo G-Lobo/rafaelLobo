@@ -1,112 +1,160 @@
 @extends('layouts.rafaelLobo')
 
 @section('header')
-header
+    <x-header-general/>
 @endsection
 
 @section('content')
-edit
+    <div class="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg my-8">
 
+        {{-- Error messages --}}
+        @foreach (['title', 'releaseDate', 'content', 'coverArt', 'duration', 'link', 'typeId', 'film_areas'] as $error)
+            @error($error)
+                <div class="alert alert-danger text-red-500 font-medium mb-4">
+                    {{ $message }}
+                </div>
+            @enderror
+        @endforeach
 
-{{-- mensagens de erro das validaçoes --}}
-@error('title')
-<div class="alert alert-danger">{{ $message }}</div>
-@enderror
-@error('releaseDate')
-<div class="alert alert-danger">{{ $message }}</div>
-@enderror
-@error('content')
-<div class="alert alert-danger">{{ $message }}</div>
-@enderror
-@error('coverArt')
-<div class="alert alert-danger">{{ $message }}</div>
-@enderror
-@error('duration')
-<div class="alert alert-danger">{{ $message }}</div>
-@enderror
-@error('link')
-<div class="alert alert-danger">{{ $message }}</div>
-@enderror
+        <form action="{{ route('movies.destroy', [$post->id]) }}" method="POST" class="mb-6" onsubmit="return confirm('Tem certeza que deseja deletar este item?');">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition">
+                Deletar
+            </button>
+        </form>
 
-<div>
+        <form action="/filmes/{{ $post->id }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+            @csrf
+            @method('PUT')
 
-    <form action="{{ route('movies.destroy', [$post->id]) }}" method="POST">
-        @csrf
-        @method('DELETE')
-        <button type="submit">Deletar</button>
-    </form>
+            <!-- Title -->
+            <div class="flex flex-col">
+                <label for="title" class="text-lg font-medium mb-2">Título do filme:</label>
+                <input type="text" name="title" id="title" value="{{ old('title', $post->title) }}"
+                    class="border-2 border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
 
-    <form action="/filmes/{{$post->id}}" method="POST" enctype="multipart/form-data">
-        @csrf
-        @method('PUT')
-        <div>
-            <label for="title">Título do filme:</label>
-            <input type="text" name="title" id="title" value="@if (old('title') == null) {{ $post->title }} @else {{old('title')}} @endif">
-        </div>
+            <!-- Duration -->
+            <div class="flex flex-col">
+                <label for="duration" class="text-lg font-medium mb-2">Duração do filme em minutos:</label>
+                <input type="number" name="duration" id="duration" value="{{ old('duration', $post->duration) }}"
+                    class="border-2 border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
 
-        <div>
-            <label for="duration">Duração do filme em minutos:</label>
-            <input type="number" name="duration" id="duration" value="@if (old('duration') == null) {{ $post->duration }} @else {{old('duration')}} @endif">
-        </div>
+            <!-- Release Date -->
+            <div class="flex flex-col">
+                <label for="releaseDate" class="text-lg font-medium mb-2">Data de lançamento do filme:</label>
+                <input type="date" id="releaseDate" name="releaseDate" value="{{ old('releaseDate', $post->releaseDate?->format('Y-m-d')) }}"
+                    class="border-2 border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
 
-        <div>
-            <label for="releaseDate">Data de lançamento do filme:</label>
-            <input type="date" id="releaseDate" name="releaseDate" value="@if (old('releaseDate') == null) {{$post->releaseDate}} @else {{old('releaseDate')}} @endif">
-        </div>
+            <!-- Content (Quill Editor) -->
+            <div>
+                <label for="content" class="block text-lg font-medium text-gray-700">Conteúdo:</label>
+                <div id="quill-editor" class="h-48 border rounded-lg bg-white p-3"></div>
+                <textarea name="content" id="quill-editor-area" class="hidden">{{ old('content', $post->content) }}</textarea>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        var quillEditorArea = document.getElementById('quill-editor-area');
 
-        <div>
-            <label for="content">Conteúdo:</label>
-            <textarea name="content" id="content" cols="30" rows="10">@if (old('content') == null) {{ $post->content }} @else {{old('content')}} @endif</textarea>
-        </div>
-        <div>
-            <label for="coverArt">Imagem do Post:</label>
-            <img src="/assets/img/coverArts/{{ $post->coverArt }}" alt="">
-            <input type="file" id="coverArt" name="coverArt">
-        </div>
+                        if (quillEditorArea) {
+                            var editor = new Quill('#quill-editor', {
+                                modules: {
+                                    toolbar: [
+                                        ['bold', 'italic', 'underline', 'strike'],
+                                        ['link', 'blockquote', 'align'],
+                                        [{
+                                            list: 'ordered'
+                                        }, {
+                                            list: 'bullet'
+                                        }],
+                                    ],
+                                },
+                                theme: 'snow'
+                            });
 
-        <div>
-            <label for="prizes">Premios do Filme:</label>
-            @foreach ($post->prizes as $prize)
-                <img src="/assets/img/prizes/{{ $prize->image }}" alt="">
-            @endforeach
-            <input type="file" id="image" name="prizes[]" multiple>
-        </div>
+                            // Carregar o conteúdo salvo no Quill Editor
+                            var content = quillEditorArea.value;
+                            editor.root.innerHTML = content;
 
-        <div>
-            <label for="link">Link do filme:</label>
-            <input type="text" id="link" name="link" placeholder="link vimeo ou youtube" value="@if (old('link') == null) {{$post->link}} @else {{old('link')}} @endif">
-        </div>
+                            // Atualizar textarea oculto ao digitar no Quill
+                            editor.on('text-change', function() {
+                                quillEditorArea.value = editor.root.innerHTML;
+                            });
 
-        <div>
-            <label for="link">Tipo do filme:</label>
-            <select id="typeId" name="typeId" placeholder="Curta" value="{{old('typeId')}}">
-                @foreach ($filmTypes as $filmType)
-                    <option value="{{ $filmType->id }}">{{ $filmType->type }}</option>
-                @endforeach
+                            // Se o usuário editar o textarea diretamente, atualizar o Quill
+                            quillEditorArea.addEventListener('input', function() {
+                                editor.root.innerHTML = quillEditorArea.value;
+                            });
+                        }
+                    });
+                </script>
+            </div>
+
+            <!-- Cover Art -->
+            <div class="flex flex-col">
+                <label for="coverArt" class="text-lg font-medium mb-2">Imagem do Post:</label>
+                <img src="/assets/img/coverArts/{{ $post->coverArt }}" alt="Imagem do filme"
+                    class="mb-4 w-48 h-48 object-cover rounded-lg shadow-md">
+                <input type="file" id="coverArt" name="coverArt" class="border-2 border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+
+            <!-- Prizes -->
+            <div class="flex flex-col">
+                <label for="prizes" class="text-lg font-medium mb-2">Prêmios do Filme:</label>
+                <div class="mb-4">
+                    @foreach ($post->prizes as $prize)
+                        <img src="/assets/img/prizes/{{ $prize->image }}" alt="Premio" class="w-24 h-24 object-cover rounded-md shadow-md">
+                    @endforeach
+                </div>
+                <input type="file" id="prizes" name="prizes[]" multiple class="border-2 border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+
+            <!-- Link -->
+            <div class="flex flex-col">
+                <label for="link" class="text-lg font-medium mb-2">Link do filme:</label>
+                <input type="text" id="link" name="link" placeholder="link Vimeo ou YouTube"
+                    value="{{ old('link', $post->link) }}"
+                    class="border-2 border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+
+            <!-- Type -->
+            <div class="flex flex-col">
+                <label for="typeId" class="text-lg font-medium mb-2">Tipo do filme:</label>
+                <select id="typeId" name="typeId" class="border-2 border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    @foreach ($filmTypes as $filmType)
+                        <option value="{{ $filmType->id }}" {{ old('typeId', $post->typeId) == $filmType->id ? 'selected' : '' }}>
+                            {{ $filmType->type }}
+                        </option>
+                    @endforeach
                 </select>
-        </div>
+            </div>
 
-        <div class="form-group">
-            <label for="film_areas">Áreas de Participação</label>
-            <select name="film_areas[]" id="film_areas" class="form-control" multiple>
-                @foreach($filmAreas as $area)
-                    <option value="{{ $area->id }}">{{ $area->area }}</option>
-                @endforeach
-            </select>
-        </div>
+            <!-- Film Areas -->
+            <div class="flex flex-col">
+                <label for="film_areas" class="text-lg font-medium mb-2">Áreas de Participação:</label>
+                <select name="film_areas[]" id="film_areas" class="border-2 border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500" multiple>
+                    @foreach ($filmAreas as $area)
+                        <option value="{{ $area->id }}" @if (in_array($area->id, old('film_areas', $post->filmAreas->pluck('id')->toArray()))) selected @endif>
+                            {{ $area->area }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
 
-        <div>
-
-            <button type="submit" class="rounded-md bg-green-600">criar</button>
-            <a href="{{ route('blog.index') }}">voltar</a>
-        </div>
-
-    </form>
-</div>
-
-
+            <div class="flex justify-between mt-6">
+                <button type="submit" class="px-6 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition">
+                    Atualizar
+                </button>
+                <a href="{{ route('blog.index') }}" class="px-6 py-2 bg-gray-400 text-white rounded-md hover:bg-gray-500 transition">
+                    Voltar
+                </a>
+            </div>
+        </form>
+    </div>
 @endsection
 
 @section('footer')
-footer
+    <x-footer/>
 @endsection

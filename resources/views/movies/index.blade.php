@@ -1,53 +1,68 @@
 @extends('layouts.rafaelLobo')
 
 @section('header')
-    header
+    <x-header-general/>
 @endsection
 
 @section('content')
-    index
 
-    @if (session('success'))
-    <div>
-        {{ session('success') }}
+
+
+<div class="container mx-auto px-5 xl:px-32 xl:pr-16 pt-4 pb-16">
+    <h2 class="text-4xl font-black text-center xl:text-left mx-auto mb-2 pt-8 pb-8">FILMES</h2>
+
+    <div class="flex flex-start place-content-center xl:place-content-start">
+    <form method="GET" action="{{ route('movies.index') }}" class="flex items-center mx-0 mb-6">
+        <label for="area_id" class="text-base font-bold text-black text-center">Filtrar por Área:</label>
+        <select name="area_id" id="area_id" onchange="this.form.submit()" class="block w-full md:w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+            <option value="">Todas as Áreas</option>
+            @foreach($filmAreas as $area)
+                <option value="{{ $area->id }}" {{ request('area_id') == $area->id ? 'selected' : '' }}>
+                    {{ $area->area }}
+                </option>
+            @endforeach
+        </select>
+    </form>
     </div>
-@endif
-<form method="GET" action="{{ route('movies.index') }}">
-    <label for="area_id">Filtrar por Área:</label>
-    <select name="area_id" id="area_id" onchange="this.form.submit()">
-        <option value="">Todas as Áreas</option>
-        @foreach($filmAreas as $area)
-            <option value="{{ $area->id }}" {{ request('area_id') == $area->id ? 'selected' : '' }}>
-                {{ $area->area }}
-            </option>
-        @endforeach
-    </select>
-</form>
 
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            @foreach ($movies as $movie)
+            <a href="{{ route('movies.show', $movie->id)}}">
+                <div class="flex bg-transparent overflow-hidden transform transition duration-300 hover:scale-105">
+                    <!-- Movie Cover Art -->
+                    <img src="{{ asset('assets/img/coverArts/' . $movie->coverArt) }}" alt="{{ $movie->title }}" class="w-1/3 rounded-lg object-scale-down h-64 xl:h-auto">
 
-    @foreach ($movies as $movie)
-        <div>
-    <br>
-        {{ $movie->id }}
-        {{ $movie->title }}
-        <br>
-        {{$movie->releaseDate}}
-        <br>
-        {{$movie->content}}
-        <br>
-        {{$movie->duration}}
-        <br>
-        <iframe src="{{$movie->videoLink}}" width="640" height="360"
-    frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                    <!-- Movie Details -->
+                    <div class="w-2/3 pl-5 xl:p-4 flex flex-col justify-start">
+                        <!-- Title -->
+                        <h3 class="text-xl font-bold text-gray-800">{{ $movie->title }}</h3>
 
+                        <!-- Tags -->
+                        <div class="flex flex-wrap space-x-2 mt-">
+                            <div>
+                                <span class="bg-yellow-100 text-yellow-800 text-xs font-bold px-2.5 py-0.5 rounded-full">{{ \Carbon\Carbon::parse($movie->releaseDate)->format('Y') }}</span>
+                                {{-- <span class="bg-transparent text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">{{ $movie->duration }} min</span> --}}
+                            </div>
+                        </div>
+                        {{-- <div class="flex flex-wrap space-x-2 mt-2">
+                            @foreach($movie->filmAreas as $area)
+                                <span class="bg-blue-800 text-white text-xs font-medium px-2.5 py-0.5 rounded-full">{{ $area->area }}</span>
+                            @endforeach
+                        </div> --}}
 
-        <img src="assets/img/coverArts/{{ $movie->coverArt }}" alt="">
+                        <!-- Description -->
+                        <p class="text-gray-600 text-sm mt-4">
+                            {!! \Illuminate\Support\Str::limit($movie->content, 252, '...') !!}
+                        </p>
+                    </div>
+                </div>
+            </a>
+            @endforeach
+        </div>
 
-        <br>
     </div>
-    @endforeach
 @endsection
 
 @section('footer')
-    footer
+    <x-footer/>
 @endsection

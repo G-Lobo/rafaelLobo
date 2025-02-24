@@ -16,8 +16,8 @@ class BlogPost extends Model
         'image',
         'video',
         'link',
+        'pdf',
     ];
-
 
     protected $guarded = [];
 }

@@ -1,6 +1,3 @@
-merge
-
-filtrar filmes por tipo e area na pagina de index de filmes
 
 criar model ArtCollection
     ->Coleção
@@ -21,28 +18,16 @@ criar model ArtCollection
             ->collectionType Controller
         ->ArtCollection has one collectionType
 
-
+criar logica para comparar datas de filmes e coleçoes de arte/quadrinhos paara o trabalhos recentes na bio
 
 cirar views referentes ao novo model ArtCollections
 
+*--------*--------*---------*--------*
+ao upar site
+sudo nano /etc/php/"versão"/fpm(apache2)/php.ini  (sudo nano /etc/php/8.3/cli/php.ini   para desenvolvimento local)
+php -i | grep post_max_size ->10M
+php -i | grep upload_max_filesize ->12M
 
-criar model Bio
-    ->foto ->"profilePicture" String
-        ->logica para adiçao de foto
-    ->Texto Grande ->"headerText" String
-    ->Texto menor ->"bioTest" String
-    ->adicionar o CV ->"cv" ??? tipo a ser estudado
-    ->link instagram ->"instagramLink" String
-    ->link linkedIn->"linkedinLink" String
-    ->link Vimeo->"vimeoLink" String
-    ->link yt->"ytLink" String
-
-logica para trabalhos recentes(ou featured works -tirar essa duvida com o rafael-) aparecerem na pagina de bio pegando trabalhos dos bancos de filmes e de artes
-
-
-tentar adicionar o quill para o input de texto
-https://www.interviewsolutionshub.com/blog/how-to-use-quill-rich-text-editor-laravel
-
-
+*--------*--------*---------*--------*
 frontend
 https://www.figma.com/design/BiNx4TOnLX8OB9aaHGzd1P/LoboSite
