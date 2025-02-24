@@ -17,10 +17,10 @@
                 <a href="{{ route('about.index') }}">BIO</a>
             </h2>
             <h2 class="font-black text-xl text-black">
-                <a href="{{ route('blog.index') }}">PUBLICAÇÕES</a>
+                <a href="{{ route('movies.index') }}">PORTIFÓLIO</a>
             </h2>
             <h2 class="font-black text-xl text-black">
-                <a href="{{ route('movies.index') }}">PORTIFÓLIO</a>
+                <a href="{{ route('blog.index') }}">PUBLICAÇÕES</a>
             </h2>
         </div>
     </div>

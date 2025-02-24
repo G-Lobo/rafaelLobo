@@ -17,9 +17,9 @@
                 <!-- Content Section -->
                 <div class="flex flex-col">
                     <!-- Title -->
-                    <h1 class="text-5xl font-bold mb-[7vh]">{{ $post->title }}</h1>
+                    <h1 class="text-5xl font-bold mb-3">{{ $post->title }}</h1>
                     <!-- Release Date and Duration -->
-                    <div class="flex space-x-4 text-gray-600 mb-[7vh]">
+                    <div class="flex space-x-4 text-gray-600 mb-3">
                         <span class="flex items-between">
                             <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20">
                                 <path
@@ -36,7 +36,7 @@
                         </span>
                     </div>
                     <!-- Type and Areas -->
-                    <div class="flex flex-wrap space-x-2 mb-[11vh]">
+                    <div class="flex flex-wrap space-x-2 mb-10">
                         <span
                             class="bg-blue-100 text-blue-800 text-sm font-medium px-2.5 py-0.5 rounded">{{ $type->type }}</span>
                         @foreach ($post->filmAreas as $area)

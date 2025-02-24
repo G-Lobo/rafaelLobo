@@ -1,3 +1,4 @@
+
 criar model ArtCollection
     ->Coleção
         ->nome ->"collectionName" String

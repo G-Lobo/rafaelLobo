@@ -25,7 +25,7 @@
                         <img src="{{ asset('assets/img/profPic/' . $bio->profilePic) }}" alt="Rafael Lobo"
                             class="rounded-lg shadow-lg w-256 h-256 object-cover mx-auto">
                         <!-- CV Box -->
-                        <a href="{{ asset('assets/pdf/bio/' . $bio->pdf) }}"
+                        <a href="{{ asset('assets/pdf/bio/' . $bio->pdf) }} " target="_blank" rel="noopener noreferrer"
                             class="absolute -bottom-0 right-0 bg-red-500 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:bg-gray-200 hover:text-red-500 transition duration-300">
                             CV
                         </a>
