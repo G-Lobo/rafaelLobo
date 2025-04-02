@@ -9,6 +9,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: "Ver secrets"
+        run: |
+          echo "HOST: ${HOST}"
+          echo "USERNAME: ${USERNAME}"
+          echo "SSH_PRIVATE_KEY: ${SSH_PRIVATE_KEY}"
+        env:
+          HOST: ${{ secrets.HOST }}
+          USERNAME: ${{ secrets.USERNAME }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+
+
       - name: "Baixar o código"
         uses: actions/checkout@v4
 
