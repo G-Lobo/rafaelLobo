@@ -25,6 +25,8 @@ jobs:
       - name: "Build da aplicação"
         uses: appleboy/ssh-action@v1.0.3
         with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /sistema
