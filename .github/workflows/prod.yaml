@@ -1,0 +1,32 @@
+name: Prod Deploy
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Baixar o código"
+        uses: actions/checkout@v4
+
+      - name: "Copiar arquivos para VPS"
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: .
+          target: "/sistema"
+
+      - name: "Build da aplicação"
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /sistema
+            composer install --no-dev --no-progress -a
+            php artisan optimize
+            chown -R www-data:www-data .
