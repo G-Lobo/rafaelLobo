@@ -20,7 +20,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: .
-          target: "/sistema"
+          target: "/var/www/html/rafaelLobo"
 
       - name: "Build da aplicação"
         uses: appleboy/ssh-action@v1.0.3
@@ -29,7 +29,9 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd /sistema
+            cd /var/www/html/rafaelLobo
             composer install --no-dev --no-progress -a
+            npm run build
+            php artisan migrate
             php artisan optimize
             chown -R www-data:www-data .
