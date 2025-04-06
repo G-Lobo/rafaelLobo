@@ -1,12 +1,10 @@
-version: '3.8'
-
-services:
-  laravel-app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "8080:80"
-    volumes:
-      - .:/var/www/html
-    container_name: laravel_apache
+postgres:
+  image: postgres
+  container_name: postgres
+  environment:
+    POSTGRES_USER: root
+    POSTGRES_PASSWORD: 1234
+    POSTGRES_DB: root
+  # user: postgres
+  ports:
+    - "5432:5432"
