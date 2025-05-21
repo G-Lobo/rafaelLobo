@@ -25,7 +25,7 @@
         </form>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         @foreach ($movies as $movie)
         <a href="{{ route('movies.show', $movie->id)}}">
             <div class="flex bg-transparent overflow-hidden transform transition duration-300 hover:scale-105">
@@ -54,9 +54,9 @@
                 <p class="text-gray-600 text-sm mt-4">
                     {!! \Illuminate\Support\Str::limit($movie->content, 252, '...') !!}
                 </p>
+                </div>
             </div>
-    </div>
-    </a>
+        </a>
     @endforeach
     </div>
 
