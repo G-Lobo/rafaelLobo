@@ -46,9 +46,9 @@
                     </div>
 
                 <!-- Description -->
-                    <!-- <p class="text-gray-600 text-sm mt-4">
-                        {!! \Illuminate\Support\Str::limit($movie->content, 252, '...') !!}
-                    </p> -->
+                    <p class="text-gray-600 text-sm mt-4">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem cum consequuntur commodi autem at ad architecto debitis ratione veniam vel dolorem accusantium necessitatibus tenetur velit, non quod. Eaque, inventore dolorem!
+                    </p>
                 </div>
             </div>
         </a>
