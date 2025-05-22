@@ -46,9 +46,9 @@
                     </div>
 
                 <!-- Description -->
-                <p class="text-gray-600 text-sm mt-4">
-                    {!! \Illuminate\Support\Str::limit($movie->content, 252, '...') !!}
-                </p>
+                    <!-- <p class="text-gray-600 text-sm mt-4">
+                        {!! \Illuminate\Support\Str::limit($movie->content, 252, '...') !!}
+                    </p> -->
                 </div>
             </div>
         </a>
