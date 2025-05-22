@@ -47,7 +47,7 @@
 
                 <!-- Description -->
                     <p class="text-gray-600 text-sm mt-4">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem cum consequuntur commodi autem at ad architecto debitis ratione veniam vel dolorem accusantium necessitatibus tenetur velit, non quod. Eaque, inventore dolorem!
+                        {!! \Illuminate\Support\Str::limit(strip_tags($movie->content), 252, '...') !!}
                     </p>
                 </div>
             </div>
