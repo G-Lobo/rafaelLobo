@@ -27,7 +27,31 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         @foreach ($movies as $movie)
-        <p>{{ $movie->title }}</p>
+        <a href="{{ route('movies.show', $movie->id)}}">
+            <div class="flex bg-transparent overflow-hidden transform transition duration-300 hover:scale-105">
+                <!-- Movie Cover Art -->
+                <img src="{{ asset('assets/img/coverArts/' . $movie->coverArt) }}" alt="{{ $movie->title }}" class="w-1/3 rounded-lg object-scale-down h-64 xl:h-auto" />
+
+                <!-- Movie Details -->
+                <div class="w-2/3 pl-5 xl:p-4 flex flex-col justify-start">
+                    <!-- Title -->
+                    <h3 class="text-xl font-bold text-gray-800">{{ $movie->title }}</h3>
+
+                    <!-- Tags -->
+                    <div class="flex flex-wrap space-x-2 mt-2">
+                        <div>
+                            <span class="bg-yellow-100 text-yellow-800 text-xs font-bold px-2.5 py-0.5 rounded-full">{{ \Carbon\Carbon::parse($movie->releaseDate)->format('Y') }}</span>
+                            {{-- <span class="bg-transparent text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">{{ $movie->duration }} min</span> --}}
+                        </div>
+                    </div>
+
+                <!-- Description -->
+                <p class="text-gray-600 text-sm mt-4">
+                    {!! \Illuminate\Support\Str::limit($movie->content, 252, '...') !!}
+                </p>
+                </div>
+            </div>
+        </a>
         @endforeach
     </div>
 
