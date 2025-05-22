@@ -25,7 +25,11 @@
         </form>
     </div>
 
-    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        @foreach ($movies as $movie)
+        <p>{{ $movie->title }}</p>
+        @endforeach
+    </div>
 
 </div>
 @endsection
