@@ -22,6 +22,7 @@ class MovieController extends Controller
                 $q->where('film_area_id', $request->area_id);
             });
         }
+        $query->orderBy('created_at', 'desc');
 
         $movies = $query->paginate(6);
         $filmAreas = FilmArea::all();

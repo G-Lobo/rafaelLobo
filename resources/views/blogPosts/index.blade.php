@@ -9,15 +9,14 @@
 
 
         {{-- title  --}}
-        <h2 class="text-4xl font-black mb-8 text-center xl:text-left">PUBLICAÇÕES</h2>
-
+        <h2 class="text-4xl font-black mb-8 text-center xl:text-left">POSTAGENS</h2>
 
         <div class="container mb-8 p-6">
             <div class="flex flex-col space-y-8">
                 @if ($blogPosts->isEmpty())
 
                     <div class="self-center pt-16 text-gray-500 text-bold text-xl font-bold">
-                        <h1>Ainda não temos postagens...</h1>
+                        <h1>Ainda não temos publicações...</h1>
                     </div>
                 @else
                 @foreach ($blogPosts as $post)
@@ -30,6 +29,8 @@
                             </div>
                             <div class="flex-1 p-4 px-8">
                                 <h3 class="text-center xl:text-left text-xl font-semibold text-gray-800">{{ $post->title }}</h3>
+                                <p class="text-sm text-gray-500 mb-4">{{ $post->created_at->format('d M Y') }}</p>
+
                                 <div class="my-2 text-justify hidden xl:inline">
                                     {!! Str::limit(strip_tags($post->content), 550, '...') !!}
                                 </div>

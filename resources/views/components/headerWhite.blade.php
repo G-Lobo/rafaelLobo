@@ -1,25 +1,25 @@
 <div class="hidden absolute w-full md:inline xl:inline">
-    <div class="flex flex-col md:flex-row items-center justify-between pt-7 px-9 w-full">
+    <div class="flex flex-col md:flex-row items-center justify-between pt-7 px-16 w-full">
         <!-- Left Side: RAFAEL LOBO and Icon -->
         <div class="flex items-center space-x-4">
             <h1 class="font-black text-2xl text-white">
                 <a href="{{ route('home') }}">RAFAEL LOBO</a>
             </h1>
             <a href="@auth {{route('adm.pannel')}} @else{{ route('home') }} @endauth">
-            <img src="{{ asset('assets/img/icon/iconeloboBranco.png') }}" alt="Icon" class="relative mb-7 h-16 w-16">
+            <img src="{{ asset('assets/img/icon/iconeloboBranco.png') }}" alt="Icon" class="relative mb-6 h-16 w-16">
             </a>
         </div>
 
         <!-- Right Side: Navigation Links -->
         <div class="flex space-x-8 text-white">
-            <h2 class="font-black text-xl">
+            <h2 class="font-black text-lg">
                 <a href="{{ route('about.index') }}">BIO</a>
             </h2>
-            <h2 class="font-black text-xl">
-                <a href="{{ route('movies.index') }}">PORTIFÓLIO</a>
+            <h2 class="font-black text-lg">
+                <a href="{{ route('movies.index') }}">TRABALHOS</a>
             </h2>
-            <h2 class="font-black text-xl">
-                <a href="{{ route('blog.index') }}">PUBLICAÇÕES</a>
+            <h2 class="font-black text-lg">
+                <a href="{{ route('blog.index') }}">POSTAGENS</a>
             </h2>
         </div>
     </div>
@@ -38,16 +38,16 @@
                     <a class=" text-black hover:text-white duration-500 space-x-8 font-black text-xl" href="{{ route('about.index') }}">BIO</a>
                 </li>
                 <li>
-                    <a class=" text-black hover:text-white duration-500 space-x-8 font-black text-xl" href="{{ route('blog.index') }}">PUBLICAÇÕES</a>
+                    <a class=" text-black hover:text-white duration-500 space-x-8 font-black text-xl" href="{{ route('blog.index') }}">POSTAGENS</a>
                 </li>
                 <li>
-                    <a class=" text-black hover:text-white duration-500 space-x-8 font-black text-xl" href="{{ route('movies.index') }}">PORTIFÓLIO</a>
+                    <a class=" text-black hover:text-white duration-500 space-x-8 font-black text-xl" href="{{ route('movies.index') }}">TRABALHOS</a>
                 </li>
             </ul>
         </div>
 
         <div class="flex items-center gap-6 xl:hidden">
-            <ion-icon onclick="onToggleMenu(this)" class="text-2xl cursor-pointer text-white after:text-black mr-5" name="menu"></ion-icon>
+            <ion-icon onclick="onToggleMenu(this)" class="text-3xl cursor-pointer text-white after:text-black mr-5" name="menu"></ion-icon>
         </div>
     </nav>
 

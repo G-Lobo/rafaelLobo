@@ -17,7 +17,7 @@
                 <!-- Content Section -->
                 <div class="flex flex-col">
                     <!-- Title -->
-                    <h1 class="text-5xl font-bold mb-3">{{ $post->title }}</h1>
+                    <h1 class="text-4xl font-bold mb-3">{{ $post->title }}</h1>
                     <!-- Release Date and Duration -->
                     <div class="flex space-x-4 text-gray-600 mb-3">
                         <span class="flex items-between">
@@ -26,7 +26,7 @@
                                     d="M6 2a1 1 0 000 2h1v1a1 1 0 102 0V4h2v1a1 1 0 102 0V4h1a1 1 0 100-2H6zM3 8a1 1 0 011-1h12a1 1 0 011 1v9a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm2 1v8h10V9H5z">
                                 </path>
                             </svg>
-                            {{ \Carbon\Carbon::parse($post->releaseDate)->format('d M Y') }}
+                            {{ \Carbon\Carbon::parse($post->releaseDate)->format('Y') }}
                         </span>
                         <span class="flex items-between">
                             <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20">

@@ -24,6 +24,10 @@
         </div>
     @endif
 
+    {{-- link --}}
+
+    {{-- video --}}
+
     <!-- PDF Download Button -->
     @if($post->pdf)
         <div class="mt-6">
