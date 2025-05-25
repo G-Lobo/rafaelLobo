@@ -1,4 +1,4 @@
-<div class="hidden absolute w-full md:inline xl:inline">
+<div class="hidden absolute w-full md:hidden xl:inline">
     <div class="flex flex-col md:flex-row items-center justify-between pt-7 px-16 w-full">
         <!-- Left Side: RAFAEL LOBO and Icon -->
         <div class="flex items-center space-x-4">
@@ -25,7 +25,7 @@
     </div>
 </div>
 {{-- hamburguer --}}
-    <nav class="absolute flex justify-between items-center w-[100%] mx-auto md:hidden xl:hidden">
+    <nav class="absolute flex justify-between items-center w-[100%] mx-auto  xl:hidden">
         <div>
             <a href="@auth {{route('adm.pannel')}} @else{{ route('home') }} @endauth">
                 <img class="ml-5 h-16" src="{{ asset('assets/img/icon/iconeloboBranco.png') }}" alt="Logo">

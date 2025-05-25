@@ -1,4 +1,4 @@
-<div class="hidden sticky w-full md:inline xl:inline">
+<div class="hidden sticky w-full md:hidden xl:inline">
     <div class="flex flex-col md:flex-row items-center justify-between pt-2 px-16 w-full">
         <!-- Left Side: RAFAEL LOBO and Icon -->
         <div class="flex items-center space-x-4">
