@@ -33,7 +33,7 @@
         </div>
         <div
             class="nav-links duration-500 absolute xl:static bg-gray-300 xl:min-h-fit min-h-[45vh] left-0 top-[-50vh] xl:w-auto w-full flex items-center px-16">
-            <ul class="flex flex-col xl:flex-row md:items-center gap-[4vw]">
+            <ul class="flex flex-col xl:flex-row  gap-[4vw]">
                 <li>
                     <a class=" text-black hover:text-white duration-500 space-x-8 font-black text-xl" href="{{ route('about.index') }}">BIO</a>
                 </li>
