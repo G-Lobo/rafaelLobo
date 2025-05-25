@@ -13,7 +13,7 @@
 @endsection
 
 @section('footer')
-<x-footer/>
+<x-footer />
 @endsection
 
 

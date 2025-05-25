@@ -1,4 +1,4 @@
-<div class="flex justify-between px-6 py-6 bg-white">
+<div class="flex justify-between px-6 py-6 bg-white ">
 
     <!-- Left Side Links -->
     <div class="flex flex-col align-middle pt-5">
@@ -21,10 +21,10 @@
             <a href="{{ route('about.index') }}">BIO</a>
         </h2>
         <h2 class="font-heebo text-xl text-black">
-            <a href="{{ route('blog.index') }}">FILMES</a>
+            <a href="{{ route('blog.index') }}">TRABALHOS</a>
         </h2>
         <h2 class="font-heebo text-xl text-black">
-            <a href="#">POSTS</a>
+            <a href="#">PUBLICAÇÕES</a>
         </h2>
     </div>
 </div>
