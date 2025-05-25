@@ -28,7 +28,7 @@
     <nav class="absolute flex justify-between items-center w-[100%] mx-auto xl:hidden">
         <div>
             <a href="@auth {{route('adm.pannel')}} @else{{ route('home') }} @endauth">
-                <img class="ml-5 h-20" src="{{ asset('assets/img/icon/iconeloboBranco.png') }}" alt="Logo">
+                <img class="ml-5 h-16" src="{{ asset('assets/img/icon/iconeloboBranco.png') }}" alt="Logo">
             </a>
         </div>
         <div
