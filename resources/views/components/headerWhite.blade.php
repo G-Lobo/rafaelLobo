@@ -25,7 +25,7 @@
     </div>
 </div>
 {{-- hamburguer --}}
-    <nav class="absolute flex justify-between items-center w-[100%] mx-auto xl:hidden">
+    <nav class="absolute flex justify-between items-center w-[100%] mx-auto md:hidden xl:hidden">
         <div>
             <a href="@auth {{route('adm.pannel')}} @else{{ route('home') }} @endauth">
                 <img class="ml-5 h-16" src="{{ asset('assets/img/icon/iconeloboBranco.png') }}" alt="Logo">
