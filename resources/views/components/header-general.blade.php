@@ -7,7 +7,7 @@
             </h1>
             <a href="@auth {{ route('adm.pannel') }} @else{{ route('home') }} @endauth">
                 <img src="{{ asset('assets/img/icon/iconeloboPreto.png') }}" alt="Icon"
-                    class="relative mb-7 h-18 w-18">
+                    class="relative mb-7 h-16 w-16">
             </a>
         </div>
 
