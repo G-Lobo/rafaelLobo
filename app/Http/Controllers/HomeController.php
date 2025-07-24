@@ -10,10 +10,8 @@ class HomeController extends Controller
 {
     public function __invoke() {
 
-        $posts = BlogPost::orderBy('created_at', 'desc')->get();
-        $movies = Movie::orderBy('created_at', 'desc')->get();
 
 
-        return view('home', compact('posts', 'movies'));
+        return view('home');
     }
 }

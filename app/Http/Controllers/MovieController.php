@@ -55,10 +55,10 @@ class MovieController extends Controller
     {
         $request->validate([
             'title' => ['required'],
-            'releaseDate' => ['required'],
+            'releaseDate' => ['nullable'],
             'content' => ['required'],
             'coverArt' => ['required'],
-            'duration'  => ['required'],
+            'duration'  => ['nullable'],
             'link' => ['nullable', 'url', 'regex:/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be|vimeo\.com)\/.+$/'],
             'typeId' => ['required'],
         ]);
