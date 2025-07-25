@@ -13,19 +13,22 @@
 
         <!-- Right Side: Navigation Links -->
         <div class="flex space-x-8">
-            <h2 class="font-black text-lg text-black">
-                <a href="{{ route('about.index') }}">BIO</a>
-            </h2>
+       
             <h2 class="font-black text-lg text-black">
                 <a href="{{ route('movies.index') }}">TRABALHOS</a>
             </h2>
+
             <h2 class="font-black text-lg text-black">
                 <a href="{{ route('blog.index') }}">POSTAGENS</a>
+            </h2>
+
+            <h2 class="font-black text-lg text-black">
+                <a href="{{ route('about.index') }}">BIO</a>
             </h2>
         </div>
     </div>
 </div>
-{{-- hamburguer --}}
+<!-- hamburguer -->
 <nav class="sticky flex justify-between items-center w-[100%] mx-auto xl:hidden z-40">
     <div>
         <a href="@auth {{ route('adm.pannel') }} @else{{ route('home') }} @endauth">

@@ -8,7 +8,7 @@
     <div class="container mx-auto px-4 pt-16 pb-32">
 
 
-        {{-- title  --}}
+        <!-- title  -->
         <h2 class="text-4xl font-black mb-8 text-center xl:text-left">POSTAGENS</h2>
 
         <div class="container mb-8 p-6">
@@ -40,7 +40,7 @@
                             </div>
                         </div>
                     </a>
-                    {{-- horizontal line --}}
+                    <!-- horizontal line -->
                     <div>
                         <hr class="border-gray-300 mb-4">
                     </hr>

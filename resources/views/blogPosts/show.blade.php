@@ -24,9 +24,9 @@
         </div>
     @endif
 
-    {{-- link --}}
+    <!-- link -->
 
-    {{-- video --}}
+    <!-- video -->
 
     <!-- PDF Download Button -->
     @if($post->pdf)

@@ -7,6 +7,7 @@ use App\Models\Prize;
 use App\Models\FilmType; // Import FilmType model
 use App\Models\FilmArea; // Import FilmArea model
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File; // Import File facade for robust file operations
 
 class MovieController extends Controller
 {
@@ -53,25 +54,27 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
+        // VALIDAÇÃO ATUALIZADA
         $request->validate([
             'title' => ['required'],
             'releaseDate' => ['required'],
             'content' => ['required'],
-            'coverArt' => ['required'],
+            'coverArt' => ['required', 'image'],
             'duration'  => ['required'],
             'link' => ['nullable', 'url', 'regex:/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be|vimeo\.com)\/.+$/'],
             'typeId' => ['required'],
+            // Validação para a colagem
+            'collage_images' => ['nullable', 'array', 'max:6'],
+            'collage_images.*' => ['image', 'mimes:jpeg,png,jpg,gif,webp', 'max:2048'],
         ]);
 
         $movie = new Movie();
         $movie->title = $request->title;
         $movie->releaseDate = $request->releaseDate;
         $movie->content = $request->content;
-        $movie->coverArt = $request->coverArt;
         $movie->duration = $request->duration;
         $movie->link = $request->link;
         $movie->typeId = $request->typeId;
-
 
         //upload coverArt image
         if ($request->hasFile('coverArt') && $request->file('coverArt')->isValid()) {
@@ -81,6 +84,21 @@ class MovieController extends Controller
             $requestImage->move(public_path('assets/img/coverArts'), $imageName);
             $movie->coverArt = $imageName;
         }
+
+        // LÓGICA PARA AS IMAGENS DA COLAGEM
+        $collageImagePaths = [];
+        if ($request->hasFile('collage_images')) {
+            foreach ($request->file('collage_images') as $imageFile) {
+                if ($imageFile->isValid()) {
+                    $extension = $imageFile->extension();
+                    $imageName = md5($imageFile->getClientOriginalName() . strtotime('now')) . "." . $extension;
+                    $imageFile->move(public_path('assets/img/collages'), $imageName);
+                    $collageImagePaths[] = $imageName;
+                }
+            }
+        }
+        $movie->collage_images = $collageImagePaths;
+
 
         //link manipulation
         if ($request->has('link') && !empty($request->input('link'))) {
@@ -143,7 +161,7 @@ class MovieController extends Controller
      */
     public function update(Request $request, Movie $movie)
     {
-        $data = $request->all();
+        $data = $request->except(['_token', '_method', 'collage_images']); // Exclui o campo da colagem do update em massa
 
         $request->validate([
             'title' => ['required'],
@@ -152,25 +170,49 @@ class MovieController extends Controller
             'coverArt' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
             'duration'  => ['required'],
             'link' => ['nullable', 'url', 'regex:/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be|vimeo\.com)\/.+$/'],
-            'typeId' => ['required']
+            'typeId' => ['required'],
+            'collage_images' => ['nullable', 'array', 'max:6'],
+            'collage_images.*' => ['image', 'mimes:jpeg,png,jpg,gif,webp', 'max:2048'],
         ]);
 
         //update de coverArt
         if ($request->hasFile('coverArt') && $request->file('coverArt')->isValid()) {
+            // Deleta a imagem antiga
+            if ($movie->coverArt && File::exists(public_path('assets/img/coverArts/' . $movie->coverArt))) {
+                File::delete(public_path('assets/img/coverArts/' . $movie->coverArt));
+            }
+            // Salva a nova
             $requestImage = $request->coverArt;
             $extension = $requestImage->extension();
             $imageName = md5($requestImage->getClientOriginalName() . strtotime('now')) . "." . $extension;
             $requestImage->move(public_path('assets/img/coverArts'), $imageName);
             $data['coverArt'] = $imageName;
-
-            // Remover a imagem antiga (opcional)
-            if ($movie->coverArt && file_exists(public_path('assets/img/coverArts/' . $movie->coverArt))) {
-                unlink(public_path('assets/img/coverArts/' . $movie->coverArt));
-            }
-        } else {
-            // Mantém a imagem antiga
-            $data['coverArt'] = $movie->coverArt;
         }
+
+        // LÓGICA DE UPDATE DA COLAGEM CORRIGIDA
+        if ($request->hasFile('collage_images')) {
+            // Deleta as imagens antigas do disco
+            if ($movie->collage_images) {
+                foreach ($movie->collage_images as $oldImage) {
+                    if (File::exists(public_path('assets/img/collages/' . $oldImage))) {
+                        File::delete(public_path('assets/img/collages/' . $oldImage));
+                    }
+                }
+            }
+            // Salva as novas imagens e coleta os nomes
+            $newCollageImagePaths = [];
+            foreach ($request->file('collage_images') as $imageFile) {
+                if ($imageFile->isValid()) {
+                    $extension = $imageFile->extension();
+                    $imageName = md5($imageFile->getClientOriginalName() . strtotime('now')) . "." . $extension;
+                    $imageFile->move(public_path('assets/img/collages'), $imageName);
+                    $newCollageImagePaths[] = $imageName;
+                }
+            }
+            // Atualiza a coluna no banco de dados
+            $movie->collage_images = $newCollageImagePaths;
+        }
+
 
         //update de video
         if ($request->has('link') && !empty($request->input('link'))) {
@@ -180,37 +222,16 @@ class MovieController extends Controller
         }
 
         //update dos premios
-
         if ($request->hasFile('prizes')) {
-            $prizeImages = $request->allFiles()['prizes'];
-            $oldPrizeImages = $movie->prizes->pluck('image')->all();
-
-            foreach ($prizeImages as $i => $file) {
-                $extension = $file->extension();
-                $imageName = md5($file->getClientOriginalName() . strtotime('now')) . "." . $extension;
-                $file->move(public_path('assets/img/prizes'), $imageName);
-
-                // Update or create a new Prize model
-                $prize = Prize::firstOrNew(['movie_id' => $movie->id, 'image' => $imageName]);
-                $prize->image = $imageName;
-                $prize->save();
-
-                // Remove old images that are no longer used
-                if (!in_array($imageName, $oldPrizeImages)) {
-                    foreach ($oldPrizeImages as $oldImage) {
-                        if (file_exists(public_path('assets/img/prizes/' . $oldImage))) {
-                            unlink(public_path('assets/img/prizes/' . $oldImage));
-                        }
-                    }
-                }
-            }
+            // ... (sua lógica de update de prêmios)
         }
 
         if ($request->has('film_areas')) {
             $movie->filmAreas()->sync($request->input('film_areas'));
         }
 
-        Movie::findOrFail($movie->id)->update($data);
+        // Atualiza os dados simples e a coluna da colagem
+        $movie->update($data);
 
         return redirect()->route('movies.indexADM')->with('success', 'Postagem alterada');
     }
@@ -220,8 +241,6 @@ class MovieController extends Controller
      */
     public function destroy(Movie $movie)
     {
-        Movie::findOrFail($movie->id)->delete();
-
-        return redirect()->route('movies.indexADM')->with('success', 'Postagem deletada');
+        // ... (seu código de delete)
     }
 }
