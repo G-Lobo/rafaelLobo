@@ -7,7 +7,7 @@
 @section('content')
     <div class="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg my-8">
 
-        {{-- Error messages --}}
+        <!-- Error messages -->
         @foreach (['title', 'releaseDate', 'content', 'coverArt', 'duration', 'link', 'typeId', 'film_areas'] as $error)
             @error($error)
                 <div class="alert alert-danger text-red-500 font-medium mb-4">
@@ -57,36 +57,14 @@
                 <script>
                     document.addEventListener('DOMContentLoaded', function() {
                         var quillEditorArea = document.getElementById('quill-editor-area');
-
                         if (quillEditorArea) {
                             var editor = new Quill('#quill-editor', {
-                                modules: {
-                                    toolbar: [
-                                        ['bold', 'italic', 'underline', 'strike'],
-                                        ['link', 'blockquote', 'align'],
-                                        [{
-                                            list: 'ordered'
-                                        }, {
-                                            list: 'bullet'
-                                        }],
-                                    ],
-                                },
+                                modules: { toolbar: [ ['bold', 'italic', 'underline', 'strike'], ['link', 'blockquote', 'align'], [{ list: 'ordered' }, { list: 'bullet' }], ], },
                                 theme: 'snow'
                             });
-
-                            // Carregar o conteúdo salvo no Quill Editor
-                            var content = quillEditorArea.value;
-                            editor.root.innerHTML = content;
-
-                            // Atualizar textarea oculto ao digitar no Quill
-                            editor.on('text-change', function() {
-                                quillEditorArea.value = editor.root.innerHTML;
-                            });
-
-                            // Se o usuário editar o textarea diretamente, atualizar o Quill
-                            quillEditorArea.addEventListener('input', function() {
-                                editor.root.innerHTML = quillEditorArea.value;
-                            });
+                            editor.root.innerHTML = quillEditorArea.value;
+                            editor.on('text-change', function() { quillEditorArea.value = editor.root.innerHTML; });
+                            quillEditorArea.addEventListener('input', function() { editor.root.innerHTML = quillEditorArea.value; });
                         }
                     });
                 </script>
@@ -100,10 +78,25 @@
                 <input type="file" id="coverArt" name="coverArt" class="border-2 border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
 
+            <!-- Collage Images (Stills) -->
+            <div class="flex flex-col">
+                <label for="collage_images" class="text-lg font-medium mb-2">Imagens da Colagem (Stills):</label>
+                <div class="mb-4 flex flex-wrap gap-4">
+                    @if($post->collage_images)
+                        @foreach ($post->collage_images as $image)
+                            <img src="{{ asset('assets/img/collages/' . $image) }}" alt="Imagem da colagem" class="w-24 h-24 object-cover rounded-md shadow-md">
+                        @endforeach
+                    @endif
+                </div>
+                <input type="file" id="collage_images" name="collage_images[]" multiple class="border-2 border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <p class="text-sm text-gray-500 mt-1">Envie novas imagens para substituir a colagem existente. Se nenhum arquivo for enviado, a colagem atual será mantida.</p>
+            </div>
+
+
             <!-- Prizes -->
             <div class="flex flex-col">
                 <label for="prizes" class="text-lg font-medium mb-2">Prêmios do Filme:</label>
-                <div class="mb-4">
+                <div class="mb-4 flex flex-wrap gap-2">
                     @foreach ($post->prizes as $prize)
                         <img src="/assets/img/prizes/{{ $prize->image }}" alt="Premio" class="w-24 h-24 object-cover rounded-md shadow-md">
                     @endforeach
@@ -147,7 +140,7 @@
                 <button type="submit" class="px-6 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition">
                     Atualizar
                 </button>
-                <a href="{{ route('blog.index') }}" class="px-6 py-2 bg-gray-400 text-white rounded-md hover:bg-gray-500 transition">
+                <a href="{{ route('movies.indexADM') }}" class="px-6 py-2 bg-gray-400 text-white rounded-md hover:bg-gray-500 transition">
                     Voltar
                 </a>
             </div>

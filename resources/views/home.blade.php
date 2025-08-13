@@ -1,19 +1,53 @@
 @extends('layouts.rafaelLobo')
 
-@section('header')
-<x-headerWhite/>
-@endsection
-
 @section('content')
 
+    <!-- Layout normal - Telas Médias e Desktop -->
+    <div class="hidden md:flex min-h-screen flex-col bg-[url('/assets/img/bg/Background-main.webp')] bg-cover bg-center">
+        <!-- HEADER -->
+        <header>
+            <x-headerWhite/>
+        </header>
 
-    <div class="bg-[url('/assets/img/bg/Background-01.jpg')] bg-cover min-h-screen">
+        <!-- MAIN -->
+        <main class="flex-grow">
+        </main>
+
+        <!-- FOOTER -->
+        <footer>
+            <x-footer />
+        </footer>
     </div>
-</div>
+
+    <!-- Layout Mobile com menu -->
+
+    <div class="md:hidden min-h-screen flex flex-col bg-[url('/assets/img/bg/Background-main.webp')] bg-cover bg-center">
+
+        <!-- HEADER -->
+        <header>
+            <x-headerWhite/>
+        </header>
+
+        <!-- MAIN -->
+        <main class="flex-grow flex items-center justify-center">
+            <nav class="flex flex-col items-center space-y-6">
+                <a href="{{ route('about.index') }}" class="font-black text-3xl text-white hover:text-gray-900 transition-colors duration-300">BIO</a>
+                <a href="{{ route('movies.index') }}" class="font-black text-3xl text-white hover:text-gray-900 transition-colors duration-300">TRABALHOS</a>
+                <a href="{{ route('blog.index') }}" class="font-black text-3xl text-white hover:text-gray-900 transition-colors duration-300">POSTAGENS</a>
+            </nav>
+        </main>
+
+        <!-- FOOTER -->
+        <footer>
+            <x-footer />
+        </footer>
+    </div>
+
+@endsection
+
+<!-- Deixamos as seções originais vazias para não duplicar o conteúdo -->
+@section('header')
 @endsection
 
 @section('footer')
-<x-footer />
 @endsection
-
-
