@@ -57,7 +57,7 @@ class MovieController extends Controller
         // VALIDAÇÃO ATUALIZADA
         $request->validate([
             'title' => ['required'],
-            'releaseDate' => ['required'],
+            'releaseDate' => ['nullable'],
             'content' => ['required'],
             'coverArt' => ['required', 'image'],
             'duration'  => ['required'],
