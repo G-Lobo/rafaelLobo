@@ -72,7 +72,6 @@
                                  <!-- Tipo e Áreas de Atuação -->
                 <div class="flex flex-wrap justify-center md:justify-center gap-2 mb-8">
 
-                        <span class="bg-green-100 text-green-800 text-sm font-medium px-2.5 py-0.5 rounded">{{ $area->area }}</span>
                 </div>
                         </div>
                     </a>
@@ -87,21 +86,20 @@
             </div>
 
 
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-12">
+            <div class="grid grid-cols-1 gap-x-6 gap-y-12">
                 @foreach ($institutionals as $inst)
                     <!-- POSTER CARD-->
-                    <a href="{{$inst->link}}" class="group block">
+                    <a href="{{$inst->link}}" class="group flex flex-col gap-4 md:flex-row">
                         <!-- POSTER CONTAINTER -->
-                        <div class="w-full aspect-[2/3] bg-gray-800 rounded-lg overflow-hidden shadow-2xl transition-transform duration-300 ease-in-out group-hover:scale-105">
+                        <div class="w-full md:w-1/2 aspect-video bg-gray-800 rounded-lg overflow-hidden shadow-2xl">
                             <img src="{{ asset('assets/img/institucional/' . $inst->image) }}" alt="Pôster do filme {{ $inst->name }}"
-                                 class="w-full h-full object-cover object-center">
+                            class="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105">
                         </div>
 
                         <!-- Informações centralizadas abaixo do pôster -->
-                        <div class="mt-4 text-white text-center">
-                            <h3 class="font-bold text-lg truncate" title="{{ $inst->name }}">{{ $inst->name }}</h3>
-
-                            <p class="line-clamp-4">{{ strip_tags($inst->content) }}</p>
+                        <div class="mt-4 text-white w-full md:w-1/2 flex flex-col justify-center">
+                            <h3 class="font-bold text-lg" title="{{ $inst->name }}">{{ $inst->name }}</h3>
+                            <p>{{ strip_tags($inst->content) }}</p>
                         </div>
                     </a>
                 @endforeach
