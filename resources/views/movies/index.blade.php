@@ -72,6 +72,8 @@
                                  <!-- Tipo e Áreas de Atuação -->
                 <div class="flex flex-wrap justify-center md:justify-center gap-2 mb-8">
 
+                <span class="bg-green-100 text-green-800 text-sm font-medium px-2.5 py-0.5 rounded">{{ $area->area }}</span>
+
                 </div>
                         </div>
                     </a>
