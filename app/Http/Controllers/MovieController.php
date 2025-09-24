@@ -6,6 +6,7 @@ use App\Models\Movie;
 use App\Models\Prize;
 use App\Models\FilmType; // Import FilmType model
 use App\Models\FilmArea; // Import FilmArea model
+use App\Models\Institutional;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File; // Import File facade for robust file operations
 
@@ -18,6 +19,8 @@ class MovieController extends Controller
     {
         $query = Movie::query();
 
+        $institutionals = Institutional::all();
+
         if ($request->has('area_id') && !empty($request->area_id)) {
             $query->whereHas('filmAreas', function ($q) use ($request) {
                 $q->where('film_area_id', $request->area_id);
@@ -28,7 +31,7 @@ class MovieController extends Controller
         $movies = $query->paginate(6);
         $filmAreas = FilmArea::all();
 
-        return view('movies.index', compact('movies', 'filmAreas'));
+        return view('movies.index', compact('movies', 'filmAreas', 'institutionals'));
     }
 
     public function indexADM()

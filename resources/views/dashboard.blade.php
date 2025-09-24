@@ -10,6 +10,8 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     {{ __("You're logged in!") }}
+                    <br>
+                    <a href="{{ route('adm.pannel') }}"  style="color: #0000FF"  >Clique aqui para ir para o site</a>
                 </div>
             </div>
         </div>

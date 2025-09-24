@@ -1,4 +1,4 @@
-<!-- 
+<!--
   Componente Footer:
   - Usa dois layouts diferentes e alterna entre eles com base no tamanho da tela.
 -->
@@ -35,7 +35,7 @@
             <nav class="flex flex-col items-end space-y-1">
                 <a href="{{ route('home') }}" class="font-black text-lg text-black hover:text-gray-600 transition-colors">HOME</a>
                 <a href="{{ route('about.index') }}" class="font-black text-lg text-black hover:text-gray-600 transition-colors">BIO</a>
-                <a href="{{ route('movies.index') }}" class="font-black text-lg text-black hover:text-gray-600 transition-colors">TRABALHOS</a>
+                <a href="{{ route('movies.index') }}" class="font-black text-lg text-black hover:text-gray-600 transition-colors">FILMES</a>
                 <a href="{{ route('blog.index') }}" class="font-black text-lg text-black hover:text-gray-600 transition-colors">POSTAGENS</a>
             </nav>
         </div>

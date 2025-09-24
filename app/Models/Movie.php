@@ -52,7 +52,4 @@ class Movie extends Model
         return $this->belongsToMany(FilmArea::class, 'movie_film_areas');
     }
 
-    // A propriedade $guarded vazia já permite a atribuição em massa,
-    // mas é uma boa prática ser explícito com $fillable.
-    // protected $guarded = [];
 }

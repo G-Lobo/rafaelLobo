@@ -15,16 +15,16 @@
     <div class="container mx-auto px-4 md:px-8 lg:px-8 py-8 relative z-10">
 
 
- 
+
 
         <!-- Grid responsivo para o conteúdo principal -->
         <!-- Mobile = coluna. telas maiores = 2 colunas. -->
-        <div class="grid grid-cols-1 md:grid-cols-2   mt-8"> 
+        <div class="grid grid-cols-1 md:grid-cols-2   mt-8">
 
             <!-- Coluna da Esquerda: Imagem do Pôster -->
             <div class="w-full">
                 <img src="/assets/img/coverArts/{{ $post->coverArt }}" alt="{{ $post->title }}"
-                     class="rounded-lg shadow-lg w-full h-auto mx-auto md:Justify-end" style="max-width: 400px;">
+                    class="rounded-lg shadow-lg w-full h-auto mx-auto md:Justify-end" style="max-width: 400px;">
             </div>
 
             <!-- Coluna da Direita: Detalhes do Filme -->
@@ -82,7 +82,7 @@
                     @foreach ($post->prizes as $prize)
                         <div class="swiper-slide flex justify-center items-center">
                             <img src="{{ asset('assets/img/prizes/' . $prize->image) }}" alt="{{ $prize->name ?? 'Prêmio' }}"
-                                 class="w-auto h-32 object-contain">
+                                class="w-auto h-32 object-contain">
                         </div>
                     @endforeach
                 </div>

@@ -10,6 +10,7 @@ use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\FilmAreaController;
 use App\Http\Controllers\ADMPannelController;
 use App\Http\Controllers\CollageController;
+use App\Http\Controllers\InstitutionalController;
 use App\Http\Controllers\TrabalhosController;
 
 /* Rota da Home */
@@ -96,9 +97,19 @@ Route::middleware('auth', 'verified')->group(function() {
 
 Route::get('/art/{collage}', [collageController::class, 'show'])->name('collage.show');
 
+/* Rotas Filmes Institucionais */
+Route::get('/institutional', [InstitutionalController::class, 'index'])->name('institutional.index');
+
+Route::middleware('auth', 'verified')->group(function() {
+    Route::get('/institutional/adm', [InstitutionalController::class, 'indexADM'])->name('institutional.indexADM');
+    Route::get('/institutional/create', [InstitutionalController::class, 'create'])->name('institutional.create');
+    Route::post('/institutional', [InstitutionalController::class, 'store'])->name('institutional.store');
+    Route::get('/institutional/{institutional}/edit', [InstitutionalController::class, 'edit'])->name('institutional.edit');
+    Route::put('/institutional/{institutional}', [InstitutionalController::class, 'update'])->name('institutional.update');
+    Route::delete('/institutional/{institutional}', [InstitutionalController::class, 'destroy'])->name('institutional.destroy');
+});
 
 /* Rota do painel de administrador */
-
 Route::middleware('auth', 'verified')->group(function() {
     Route::get('/adm', ADMPannelController::class)->name('adm.pannel');
 });

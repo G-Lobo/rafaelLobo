@@ -41,7 +41,43 @@
                 <a href="{{ route('movies.indexADM') }}" class="mt-4 inline-block text-green-600 hover:underline">Ver
                     todos</a>
             </div>
+
+            {{-- Institutional --}}
+            <div class="p-4 border rounded-lg shadow-sm bg-gray-100">
+                <h1 class="text-2xl font-semibold mb-4">Filmes Institucionais</h1>
+                <a href="{{route('institutional.create')}}"
+                    class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">Criar novo filme</a>
+                <ul class="mt-4 space-y-2">
+                    @foreach ($works as $work)
+                        <li class="flex justify-between items-center border-b pb-2">
+                            <span>{{ $work->title }}</span>
+                            <a href="{{ route('institutional.edit', $work->id) }}"
+                                class="text-sm text-green-500 hover:underline">Editar</a>
+                        </li>
+                    @endforeach
+                </ul>
+                <a href="{{ route('institutional.indexADM') }}" class="mt-4 inline-block text-green-600 hover:underline">Ver
+                    todos</a>
+            </div>
         </div>
+
+        {{-- comics --}}
+        <div class="p-4 border rounded-lg shadow-sm bg-gray-100">
+                <h1 class="text-2xl font-semibold mb-4">Quadrinhos</h1>
+                <a href="{{ route('comic.create') }}"
+                    class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">Criar novo quadrinho</a>
+                <ul class="mt-4 space-y-2">
+                    @foreach ($comics as $comic)
+                        <li class="flex justify-between items-center border-b pb-2">
+                            <span>{{ $comic->title }}</span>
+                            <a href="{{ route('comic.edit', $comic->id) }}"
+                                class="text-sm text-green-500 hover:underline">Editar</a>
+                        </li>
+                    @endforeach
+                </ul>
+                <a href="{{ route('movies.indexADM') }}" class="mt-4 inline-block text-green-600 hover:underline">Ver
+                    todos</a>
+            </div>
 
         <!-- Gerenciar Áreas -->
         <div class="flex w-full justify-evenly">

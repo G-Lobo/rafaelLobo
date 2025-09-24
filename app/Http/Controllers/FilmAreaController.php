@@ -35,7 +35,7 @@ class FilmAreaController extends Controller
 
         $area->save();
 
-        return redirect()->route('filmArea.index')->with('success');
+        return redirect()->route('area.index')->with('success');
     }
     /**
      * Remove the specified resource from storage.
@@ -44,6 +44,6 @@ class FilmAreaController extends Controller
     {
         FilmArea::findOrFail($filmArea->id)->delete();
 
-        return redirect()->route('area.indexADM')->with('success', 'Postagem deletada');
+        return redirect()->route('area.index')->with('success', 'Postagem deletada');
     }
 }

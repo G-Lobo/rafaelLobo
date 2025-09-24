@@ -1,14 +1,24 @@
 @extends('layouts.rafaelLobo')
 
-@section('header')
+{{-- @section('header')
     <x-header-general />
-@endsection
+@endsection --}}
 
 @section('content')
 <div class="relative bg-[url('/assets/img/bg/Background-main.webp')] bg-cover bg-center min-h-screen">
 
     <!-- overlay com gradiente preto -->
     <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/80 to-black"></div>
+
+<header class="pb-20">
+            <x-headerWhite/>
+            </header>
+
+            <div class="relative z-10">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+
+
 
     @foreach ($bio as $bio)
         <div class="bg-transparent pt-24 pb-16 relative z-10">
@@ -93,6 +103,8 @@
                 </div>
             </div>
         </div>
+    </div>
+    </div>
     </div>
 </div>
 @endsection

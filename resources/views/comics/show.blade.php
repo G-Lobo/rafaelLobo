@@ -8,6 +8,9 @@
     {{-- pagina grande --}}
     <div class="hidden xl:inline">
         <div class="container mx-auto px-64 pt-8">
+            <!-- Title -->
+                    <h1 class="text-4xl font-bold mb-3">{{ $post->title }}</h1>
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <!-- Poster Image -->
                 <div class="flex justify-between h-max">
@@ -20,8 +23,6 @@
                 </div>
                 <!-- Content Section -->
                 <div class="flex flex-col">
-                    <!-- Title -->
-                    <h1 class="text-4xl font-bold mb-3">{{ $post->title }}</h1>
                     <!-- Release Date and Duration -->
                     <div class="flex space-x-4 text-gray-600 mb-3">
                         <span class="flex items-between">
@@ -79,7 +80,7 @@
     </div>
 
     <div class="container mx-auto px-5 xl:px-64 py-8">
-        <!-- Prizes -->
+        <!-- Pages -->
         @if ($post->pages->isNotEmpty())
             <div class="flex flex-wrap space-x-4 mb-4">
                 @foreach ($post->pages as $page)
@@ -88,6 +89,8 @@
                 @endforeach
             </div>
         @endif
+
+            <a href="{{ $post->link }}">Leitura Online</a>
     </div>
 
 

@@ -13,15 +13,15 @@
 
         <!-- Right Side: Navigation Links -->
         <div class="flex space-x-8">
-       
             <h2 class="font-black text-lg text-black">
-                <a href="{{ route('movies.index') }}">TRABALHOS</a>
+                <a href="{{ route('movies.index') }}">FILMES</a>
             </h2>
-
+            <h2 class="font-black text-lg text-black">
+                <a href="{{ route('comic.index') }}">QUADRINHOS</a>
+            </h2>
             <h2 class="font-black text-lg text-black">
                 <a href="{{ route('blog.index') }}">POSTAGENS</a>
             </h2>
-
             <h2 class="font-black text-lg text-black">
                 <a href="{{ route('about.index') }}">BIO</a>
             </h2>
@@ -38,18 +38,23 @@
     <div
         class="nav-links duration-500 absolute xl:static bg-gray-300 xl:min-h-fit min-h-[45vh] left-0 top-[-50vh] xl:w-auto w-full flex items-center px-16">
         <ul class="flex flex-col xl:flex-row md:items-center gap-[4vw]">
+
             <li>
-                <a class=" text-[#000000] hover:text-[white] duration-500 space-x-8 font-black text-xl"
-                    href="{{ route('about.index') }}">BIO</a>
+                <a class=" text-[#000000] hover:text-[white] duration-500 space-x-8 font-black text-xl" href="{{ route('movies.index') }}">FILMES</a>
             </li>
+
             <li>
-                <a class=" text-[#000000] hover:text-[white] duration-500 space-x-8 font-black text-xl"
-                    href="{{ route('blog.index') }}">POSTAGENS</a>
+                <a class=" text-[#000000] hover:text-[white] duration-500 space-x-8 font-black text-xl" href="{{ route('comic.index') }}">QUADRINHOS</a>
             </li>
+
             <li>
-                <a class=" text-[#000000] hover:text-[white] duration-500 space-x-8 font-black text-xl"
-                    href="{{ route('movies.index') }}">TRABALHOS</a>
+                <a class=" text-[#000000] hover:text-[white] duration-500 space-x-8 font-black text-xl" href="{{ route('blog.index') }}">POSTAGENS</a>
             </li>
+
+            <li>
+                <a class=" text-[#000000] hover:text-[white] duration-500 space-x-8 font-black text-xl" href="{{ route('about.index') }}">BIO</a>
+            </li>
+
         </ul>
     </div>
 
