@@ -81,9 +81,6 @@
 
 
             <div class="text-center mb-12">
-                <h1 class="text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
-                    Filmes
-                </h1>
                 <p class="mt-2 text-lg lg:text-xl text-gray-300">
                     Filmes Institucionais
                 </p>
@@ -104,7 +101,7 @@
                         <div class="mt-4 text-white text-center">
                             <h3 class="font-bold text-lg truncate" title="{{ $inst->name }}">{{ $inst->name }}</h3>
 
-                            <p>{!! $inst->content !!}</p>
+                            <p class="line-clamp-4">{{ strip_tags($inst->content) }}</p>
                         </div>
                     </a>
                 @endforeach
