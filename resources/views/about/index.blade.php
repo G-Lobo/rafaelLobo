@@ -5,6 +5,12 @@
 @endsection --}}
 
 @section('content')
+
+<style>
+    .prose * {
+        color: white !important
+    }
+</style>
 <div class="relative bg-[url('/assets/img/bg/Background-main.webp')] bg-cover bg-center min-h-screen">
 
     <!-- overlay com gradiente preto -->
@@ -26,7 +32,7 @@
                 <div class="flex flex-col md:flex-row items-center space-y-8 md:space-y-0 md:space-x-12">
                     <!-- Text Content -->
                     {{-- Usando as classes 'prose' e 'prose-invert' para estilizar o conteúdo HTML para fundos escuros --}}
-                    <div class="w-full md:w-2/3 prose prose-invert prose-lg">
+                    <div class="w-full md:w-2/3 prose prose-invert proseWhite" >
                         {!! $bio->content !!}
                     </div>
                     <!-- Profile Picture with CV Box -->

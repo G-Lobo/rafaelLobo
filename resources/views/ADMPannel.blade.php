@@ -50,7 +50,7 @@
                 <ul class="mt-4 space-y-2">
                     @foreach ($works as $work)
                         <li class="flex justify-between items-center border-b pb-2">
-                            <span>{{ $work->title }}</span>
+                            <span>{{ $work->name }}</span>
                             <a href="{{ route('institutional.edit', $work->id) }}"
                                 class="text-sm text-green-500 hover:underline">Editar</a>
                         </li>
@@ -59,7 +59,6 @@
                 <a href="{{ route('institutional.indexADM') }}" class="mt-4 inline-block text-green-600 hover:underline">Ver
                     todos</a>
             </div>
-        </div>
 
         {{-- comics --}}
         <div class="p-4 border rounded-lg shadow-sm bg-gray-100">
@@ -75,9 +74,10 @@
                         </li>
                     @endforeach
                 </ul>
-                <a href="{{ route('movies.indexADM') }}" class="mt-4 inline-block text-green-600 hover:underline">Ver
+                <a href="{{ route('comic.indexADM') }}" class="mt-4 inline-block text-green-600 hover:underline">Ver
                     todos</a>
             </div>
+</div>
 
         <!-- Gerenciar Áreas -->
         <div class="flex w-full justify-evenly">

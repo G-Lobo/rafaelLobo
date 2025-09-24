@@ -1,6 +1,13 @@
 @extends('layouts.rafaelLobo')
 
 @section('content')
+
+
+<style>
+    .prose * {
+        color: white !important
+    }
+</style>
     <div class="relative bg-[url('/assets/img/bg/Background-main.webp')] bg-cover bg-center min-h-screen text-white">
         <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/60 to-black"></div>
 

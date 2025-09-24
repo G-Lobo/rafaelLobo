@@ -85,7 +85,7 @@
             </div>
 
             <div>
-                <label for="link" class="block text-lg font-medium text-gray-700">Link do filme:</label>
+                <label for="link" class="block text-lg font-medium text-gray-700">Link do quadrinho:</label>
                 <input type="text" id="link" name="link" placeholder="Link do site" value="{{old('link')}}"
                     class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white shadow-sm">
             </div>

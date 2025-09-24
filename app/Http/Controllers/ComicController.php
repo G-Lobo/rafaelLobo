@@ -112,7 +112,7 @@ class ComicController extends Controller
 
         $post = Comic::findOrFail($comic->id);
 
-        return view('comic.edit', compact('post'));
+        return view('comics.edit', compact('post'));
 
     }
 
@@ -126,7 +126,7 @@ class ComicController extends Controller
         $request->validate([
             'title'=> ['required'],
             'content'=> ['required'],
-            'link' => ['required', 'url', 'regex:/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be|vimeo\.com)\/.+$/'],
+            'link' => ['required', 'url'],
             'coverImg' => ['required'],
             'releaseDate' => ['nullable'],
             'moviePoster' => ['required'],
@@ -155,9 +155,9 @@ class ComicController extends Controller
             $requestImage->move(public_path('assets/img/moviePoster'), $imageName);
             $data['moviePoster'] = $imageName;
 
-            if($comic->moviePoster && fileExists(public_path('assets/img/moviePoster'. $comic->moviePoster))) {
-                unlink(public_path('assets/img/moviePoster' . $comic->moviePoster));
-            }
+            // if($comic->moviePoster && fileExists(public_path('assets/img/moviePoster'. $comic->moviePoster))) {
+            //     unlink(public_path('assets/img/moviePoster' . $comic->moviePoster));
+            // }
         } else {
             $data['moviePoster'] = $comic->moviePoster;
         }

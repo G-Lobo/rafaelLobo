@@ -22,7 +22,7 @@ class InstitutionalController extends Controller
     {
         $works = Institutional::all();
 
-        return view('Institutional.indexADM');
+        return view('Institutional.indexADM', compact('works'));
     }
 
     /**
@@ -80,9 +80,9 @@ class InstitutionalController extends Controller
      */
     public function edit(Institutional $institutional)
     {
-        $works = Institutional::findOrFail($institutional->id);
+        $post = Institutional::findOrFail($institutional->id);
 
-        return view('Institutional.edit', compact('works'));
+        return view('Institutional.edit', compact('post'));
     }
 
     /**
