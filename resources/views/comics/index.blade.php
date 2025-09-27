@@ -2,8 +2,8 @@
 
 
 @section('content')
-<div class="relative bg-[url('/assets/img/bg/Background-main.webp')] bg-cover bg-center min-h-screen">
-    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/60 to-black"></div>
+<div class="relative min-h-screen">
+    <x-background-image :overlay="true" />
 
     <!-- Header -->
 
