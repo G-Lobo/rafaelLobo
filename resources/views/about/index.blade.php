@@ -13,8 +13,7 @@
 </style>
 <div class="relative min-h-screen">
 
-    <!-- overlay com gradiente preto -->
-    <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/80 to-black"></div>
+<x-background-image :overlay="true" />
 
 <header class="pb-20">
             <x-headerWhite/>
