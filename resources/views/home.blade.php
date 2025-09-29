@@ -3,11 +3,13 @@
 @section('content')
 
     <!-- Layout normal - Telas Médias e Desktop -->
-    <div class="hidden md:flex min-h-screen flex-col bg-[url('/assets/img/bg/Background-main.webp')] bg-cover bg-center">
+    <div class="hidden md:flex min-h-screen flex-col bg-cover bg-center">
+        <x-background-image />
         <!-- HEADER -->
         <header>
             <x-headerWhite/>
         </header>
+
 
         <!-- MAIN -->
         <main class="flex-grow">
@@ -21,8 +23,8 @@
 
     <!-- Layout Mobile com menu -->
 
-    <div class="md:hidden min-h-screen flex flex-col bg-[url('/assets/img/bg/Background-main.webp')] bg-cover bg-center">
-
+    <div class="md:hidden min-h-screen flex flex-col">
+        <x-background-image />
         <!-- HEADER -->
         <header>
             <x-headerWhite/>
