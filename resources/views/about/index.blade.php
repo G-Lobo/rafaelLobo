@@ -31,7 +31,7 @@
                 <div class="flex flex-col md:flex-row items-center space-y-8 md:space-y-0 md:space-x-12">
                     <!-- Text Content -->
                     {{-- Usando as classes 'prose' e 'prose-invert' para estilizar o conteúdo HTML para fundos escuros --}}
-                    <div class="w-full md:w-2/3 prose prose-invert proseWhite" >
+                    <div class="w-full md:w-2/3 prose xl:prose-invert" >
                         {!! $bio->content !!}
                     </div>
                     <!-- Profile Picture with CV Box -->

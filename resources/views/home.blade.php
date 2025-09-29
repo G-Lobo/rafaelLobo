@@ -27,7 +27,7 @@
         <x-background-image />
         <!-- HEADER -->
         <header>
-            <x-headerWhite/>
+            <x-headerWhiteHomeMobile/>
         </header>
 
         <!-- MAIN -->

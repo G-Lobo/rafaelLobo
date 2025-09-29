@@ -38,11 +38,11 @@
                     <label for="area_id" class="text-sm font-medium text-white">Filtrar por:</label>
                     <select name="area_id" id="area_id" onchange="this.form.submit()" class="block w-full md:w-auto px-3 py-2 border border-gray-500 bg-gray-800 text-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                         <option value="">Todas as Áreas</option>
-                        @foreach($filmAreas as $area)
+                        {{-- @foreach($filmAreas as $area)
                             <option value="{{ $area->id }}" {{ request('area_id') == $area->id ? 'selected' : '' }}>
                                 {{ $area->area }}
                             </option>
-                        @endforeach
+                        @endforeach --}}
                     </select>
                 </form>
             </div>
@@ -70,11 +70,11 @@
                             </div>
 
                                  <!-- Tipo e Áreas de Atuação -->
-                <div class="flex flex-wrap justify-center md:justify-center gap-2 mb-8">
+                {{-- <div class="flex flex-wrap justify-center md:justify-center gap-2 mb-8">
 
                 <span class="bg-green-100 text-green-800 text-sm font-medium px-2.5 py-0.5 rounded">{{ $area->area }}</span>
 
-                </div>
+                </div> --}}
                         </div>
                     </a>
                 @endforeach

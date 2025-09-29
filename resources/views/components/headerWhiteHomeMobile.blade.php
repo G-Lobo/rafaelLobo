@@ -28,7 +28,7 @@
     </div>
 </div>
 <!-- Hamburguer -->
-    <nav class="absolute flex justify-between items-center w-[100%] mx-auto  xl:hidden z-50">
+    <nav class="absolute flex justify-between items-center w-[100%] mx-auto  xl:hidden">
         <div>
             <a href="@auth {{route('adm.pannel')}} @else{{ route('home') }} @endauth">
                 <img class="ml-5 h-16" src="{{ asset('assets/img/icon/iconeloboBranco.png') }}" alt="Logo">
@@ -53,7 +53,7 @@
             </ul>
         </div>
 
-        <div class="flex items-center gap-6 xl:hidden">
+        <div class="items-center gap-6 hidden">
             <ion-icon onclick="onToggleMenu(this)" class="text-3xl cursor-pointer text-white after:text-black mr-5" name="menu"></ion-icon>
         </div>
     </nav>
