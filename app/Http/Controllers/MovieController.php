@@ -244,6 +244,8 @@ class MovieController extends Controller
      */
     public function destroy(Movie $movie)
     {
-        // ... (seu código de delete)
+        Movie::findOrFail($movie->id)->delete();
+        return redirect()->route('movie.index')->with('success', 'Postagem deletada');
+
     }
 }

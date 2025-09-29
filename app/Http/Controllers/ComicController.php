@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Page;
 use App\Models\Comic;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 use function PHPUnit\Framework\fileExists;
 
@@ -15,7 +16,7 @@ class ComicController extends Controller
      */
     public function index()
     {
-        $comics = Comic::all();
+        $comics = Comic::orderBy('created_at', 'desc')->get();
         return view('comics.index', compact('comics'));
     }
 
@@ -155,8 +156,8 @@ class ComicController extends Controller
             $requestImage->move(public_path('assets/img/moviePoster'), $imageName);
             $data['moviePoster'] = $imageName;
 
-            // if($comic->moviePoster && fileExists(public_path('assets/img/moviePoster'. $comic->moviePoster))) {
-            //     unlink(public_path('assets/img/moviePoster' . $comic->moviePoster));
+            // if($comic->moviePoster && fileExists(public_path('assets/img/moviePoster/'. $comic->moviePoster))) {
+            //     unlink(public_path('assets/img/moviePoster/' . $comic->moviePoster));
             // }
         } else {
             $data['moviePoster'] = $comic->moviePoster;
@@ -179,10 +180,14 @@ class ComicController extends Controller
 
                 if(!in_array($imageName, $oldPageImages)) {
                     foreach($oldPageImages as $oldPage) {
-                        if(file_exists(public_path('assets/img/comicPages' . $oldPage))) {
-                            unlink(public_path('assets/img/comicPages' . $oldPage));
+                        if(file_exists(public_path('assets/img/comicPages/' . $oldPage))) {
+                            File::delete(public_path('assets/img/comicPages/' . $oldPage));
                         }
                     }
+
+                    Page::where('comic_id', $comic->id)
+                    ->where('image', $oldPage)
+                    ->delete();
                 }
             }
         }
@@ -198,6 +203,6 @@ class ComicController extends Controller
     public function destroy(Comic $comic)
     {
         Comic::findOrFail($comic->id)->delete();
-        return redirect()->route('comics.index')->with('success', 'Postagem deletada');
+        return redirect()->route('comic.index')->with('success', 'Postagem deletada');
     }
 }

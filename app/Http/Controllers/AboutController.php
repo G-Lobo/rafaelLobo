@@ -16,7 +16,7 @@ class AboutController extends Controller
     public function index()
     {
         $bio = About::all();
-        $movies = Movie::latest()->take(2)->get();
+        $movies = Movie::latest()->take(4)->get();
         $filmAreas = FilmArea::all();
 
         return view('about.index', compact('movies', 'filmAreas', 'bio'));
