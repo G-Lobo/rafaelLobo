@@ -16,7 +16,7 @@
                 <a href="{{ route('movies.index') }}">FILMES</a>
             </h2>
             <h2 class="font-black text-lg">
-                <a href="{{ route('comic.index') }}">QUADRINHOS</a>
+                <a href="{{ route('comic.index') }}">QUIMERA</a>
             </h2>
             <h2 class="font-black text-lg">
                 <a href="{{ route('blog.index') }}">POSTAGENS</a>
@@ -42,7 +42,7 @@
                     <a class=" text-black hover:text-white duration-500 space-x-8 font-black text-xl" href="{{ route('movies.index') }}">FILMES</a>
                 </li>
                 <li>
-                    <a class=" text-black hover:text-white duration-500 space-x-8 font-black text-xl" href="{{ route('comic.index') }}">QUADRINHOS</a>
+                    <a class=" text-black hover:text-white duration-500 space-x-8 font-black text-xl" href="{{ route('comic.index') }}">QUIMERA</a>
                 </li>
                 <li>
                     <a class=" text-black hover:text-white duration-500 space-x-8 font-black text-xl" href="{{ route('blog.index') }}">POSTAGENS</a>

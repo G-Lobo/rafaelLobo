@@ -32,6 +32,7 @@
         <main class="flex-grow flex items-center justify-center">
             <nav class="flex flex-col items-center space-y-6">
                 <a href="{{ route('about.index') }}" class="font-black text-3xl text-white hover:text-gray-900 transition-colors duration-300">BIO</a>
+                <a href="{{ route('comic.index') }}" class="font-black text-3xl text-white hover:text-gray-900 transition-colors duration-300">QUIMERA</a>
                 <a href="{{ route('movies.index') }}" class="font-black text-3xl text-white hover:text-gray-900 transition-colors duration-300">TRABALHOS</a>
                 <a href="{{ route('blog.index') }}" class="font-black text-3xl text-white hover:text-gray-900 transition-colors duration-300">POSTAGENS</a>
             </nav>
