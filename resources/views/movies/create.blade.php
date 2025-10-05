@@ -26,13 +26,13 @@
             <div>
                 <label for="title" class="block text-lg font-medium text-gray-700">Título do filme:</label>
                 <input type="text" name="title" id="title" value="{{old('title')}}"
-                    class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white shadow-sm">
+                       class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white shadow-sm">
             </div>
 
             <div>
                 <label for="duration" class="block text-lg font-medium text-gray-700">Duração (minutos):</label>
                 <input type="number" name="duration" id="duration" value="{{old('duration')}}"
-                    class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white shadow-sm">
+                       class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white shadow-sm">
             </div>
 
             <div>
@@ -47,11 +47,7 @@
                                     toolbar: [
                                         ['bold', 'italic', 'underline', 'strike'],
                                         ['link', 'blockquote', 'align'],
-                                        [{
-                                            list: 'ordered'
-                                        }, {
-                                            list: 'bullet'
-                                        }],
+                                        [{ list: 'ordered' }, { list: 'bullet' }],
                                     ],
                                 },
                                 theme: 'snow'
@@ -73,6 +69,14 @@
                 <label for="coverArt" class="block text-lg font-medium text-gray-700">Capa do filme:</label>
                 <input type="file" id="coverArt" name="coverArt" class="w-full border p-3 rounded-lg bg-white">
             </div>
+            
+            {{-- NOVO CAMPO PARA A COLAGEM --}}
+            <div>
+                <label for="collage_images" class="block text-lg font-medium text-gray-700">Stills (até 6):</label>
+                <input type="file" id="collage_images" name="collage_images[]" multiple class="w-full border p-3 rounded-lg bg-white">
+                <p class="text-sm text-gray-500 mt-1">Selecione os stills que aparecerão na página do filme.</p>
+            </div>
+
 
             <div>
                 <label for="prizes" class="block text-lg font-medium text-gray-700">Prêmios:</label>
@@ -82,13 +86,13 @@
             <div>
                 <label for="releaseDate" class="block text-lg font-medium text-gray-700">Data de lançamento:</label>
                 <input type="date" id="releaseDate" name="releaseDate" value="{{old('releaseDate')}}"
-                    class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white shadow-sm">
+                       class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white shadow-sm">
             </div>
 
             <div>
                 <label for="link" class="block text-lg font-medium text-gray-700">Link do filme:</label>
                 <input type="text" id="link" name="link" placeholder="Vimeo ou YouTube" value="{{old('link')}}"
-                    class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white shadow-sm">
+                       class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white shadow-sm">
             </div>
 
             <div>

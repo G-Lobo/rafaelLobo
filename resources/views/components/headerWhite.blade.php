@@ -16,16 +16,20 @@
                 <a href="{{ route('about.index') }}">BIO</a>
             </h2>
             <h2 class="font-black text-lg">
-                <a href="{{ route('movies.index') }}">TRABALHOS</a>
+                <a href="{{ route('movies.index') }}">FILMES</a>
+            </h2>
+            <h2 class="font-black text-lg">
+                <a href="{{ route('comic.index') }}">QUIMERA</a>
             </h2>
             <h2 class="font-black text-lg">
                 <a href="{{ route('blog.index') }}">POSTAGENS</a>
             </h2>
+
         </div>
     </div>
 </div>
-{{-- hamburguer --}}
-    <nav class="absolute flex justify-between items-center w-[100%] mx-auto  xl:hidden">
+<!-- Hamburguer -->
+    <nav class="absolute flex justify-between items-center w-[100%] mx-auto  xl:hidden z-50">
         <div>
             <a href="@auth {{route('adm.pannel')}} @else{{ route('home') }} @endauth">
                 <img class="ml-5 h-16" src="{{ asset('assets/img/icon/iconeloboBranco.png') }}" alt="Logo">
@@ -34,14 +38,18 @@
         <div
             class="nav-links duration-500 absolute xl:static bg-gray-300 xl:min-h-fit min-h-[45vh] left-0 top-[-50vh] xl:w-auto w-full flex items-center px-16">
             <ul class="flex flex-col xl:flex-row  gap-[4vw]">
+
                 <li>
-                    <a class=" text-black hover:text-white duration-500 space-x-8 font-black text-xl" href="{{ route('about.index') }}">BIO</a>
+                    <a class=" text-black hover:text-white duration-500 space-x-8 font-black text-xl" href="{{ route('movies.index') }}">FILMES</a>
+                </li>
+                <li>
+                    <a class=" text-black hover:text-white duration-500 space-x-8 font-black text-xl" href="{{ route('comic.index') }}">QUIMERA</a>
                 </li>
                 <li>
                     <a class=" text-black hover:text-white duration-500 space-x-8 font-black text-xl" href="{{ route('blog.index') }}">POSTAGENS</a>
                 </li>
                 <li>
-                    <a class=" text-black hover:text-white duration-500 space-x-8 font-black text-xl" href="{{ route('movies.index') }}">TRABALHOS</a>
+                    <a class=" text-black hover:text-white duration-500 space-x-8 font-black text-xl" href="{{ route('about.index') }}">BIO</a>
                 </li>
             </ul>
         </div>

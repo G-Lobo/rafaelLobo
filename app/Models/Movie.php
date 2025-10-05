@@ -10,18 +10,11 @@ class Movie extends Model
 {
     use HasFactory;
 
-    public function prizes() {
-        return $this->hasMany(Prize::class);
-    }
-
-    public function filmType() {
-        return $this->belongsTo(FilmType::class);
-    }
-
-    public function filmAreas() {
-        return $this->belongsToMany(FilmArea::class, 'movie_film_areas');
-    }
-
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
         'title',
         'releaseDate',
@@ -31,13 +24,32 @@ class Movie extends Model
         'videoLink',
         'duration',
         'typeId',
-
+        'collage_images', // Adicionado para permitir a atribuição em massa
     ];
 
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
     protected $casts = [
         'releaseDate' => 'date',
+        'collage_images' => 'array', // Adicionado para tratar a coluna JSON como um array
     ];
 
+    public function prizes()
+    {
+        return $this->hasMany(Prize::class);
+    }
 
-    protected $guarded = [];
+    public function filmType()
+    {
+        return $this->belongsTo(FilmType::class);
+    }
+
+    public function filmAreas()
+    {
+        return $this->belongsToMany(FilmArea::class, 'movie_film_areas');
+    }
+
 }
