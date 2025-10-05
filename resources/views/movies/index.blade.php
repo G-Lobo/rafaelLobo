@@ -6,12 +6,12 @@
 <div class="relative min-h-screen">
 
     <!-- overlay com gradiente preto -->
-    <x-background-image :overlay="true" />
+    {{-- <x-background-image :overlay="true" /> --}}
 
          <!-- Header -->
 
             <header class="pb-20">
-            <x-headerWhite/>
+            <x-header-general/>
             </header>
 
     <!-- Page -->
@@ -22,12 +22,9 @@
 
             <!-- Title -->
             <div class="text-center mb-12">
-                <h1 class="text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
-                    Filmes
-                </h1>
-                <p class="mt-2 text-lg lg:text-xl text-gray-300">
+                <h1 class="text-4xl lg:text-5xl font-extrabold tracking-tight text-black">
                     Filmes Autorais
-                </p>
+                </h1>
             </div>
 
             <!-- Filtro de Área (Desativado) -->
@@ -61,11 +58,11 @@
                         </div>
 
                         <!-- Informações centralizadas abaixo do pôster -->
-                        <div class="mt-4 text-white text-center">
+                        <div class="mt-4 text-black text-center">
                             <h3 class="font-bold text-lg truncate" title="{{ $movie->title }}">{{ $movie->title }}</h3>
 
                             <!-- Linha de informações: Tipo e Duração -->
-                            <div class="flex justify-center items-center space-x-2 text-sm text-gray-300 mt-1">
+                            <div class="flex justify-center items-center space-x-2 text-sm text-gray-600 mt-1">
                                 <span>{{ $movie->duration }} min</span>
                             </div>
 
@@ -81,10 +78,10 @@
             </div>
 
 
-            <div class="text-center mb-12">
-                <p class="mt-2 text-lg lg:text-xl text-gray-300">
+            <<div class="text-center mb-12">
+                <h1 class="text-4xl lg:text-5xl font-extrabold tracking-tight text-black">
                     Filmes Institucionais
-                </p>
+                </h1>
             </div>
 
 
@@ -99,7 +96,7 @@
                         </div>
 
                         <!-- Informações centralizadas abaixo do pôster -->
-                        <div class="mt-4 text-white w-full md:w-1/2 flex flex-col justify-center">
+                        <div class="mt-4 text-black w-full md:w-1/2 flex flex-col justify-center">
                             <h3 class="font-bold text-lg" title="{{ $inst->name }}">{{ $inst->name }}</h3>
                             <p>{{ strip_tags($inst->content) }}</p>
                         </div>

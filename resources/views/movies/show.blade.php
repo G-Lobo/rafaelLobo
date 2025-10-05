@@ -7,7 +7,7 @@
 @section('content')
 <div class="relative min-h-screen">
 
-    <x-background-image :overlay="true" />
+    {{-- <x-background-image :overlay="true" /> --}}
 
 
     <!-- Container principal da página com padding responsivo -->
@@ -29,10 +29,10 @@
             <!-- Coluna da Direita: Detalhes do Filme -->
             <div class="flex flex-col">
                 <!-- Título -->
-                <h1 class="text-4xl lg:text-5xl font-bold mb-3 text-center md:text-left text-white">{{ $post->title }}</h1>
+                <h1 class="text-4xl lg:text-5xl font-bold mb-3 text-center md:text-left text-black">{{ $post->title }}</h1>
 
                 <!-- Data de Lançamento e Duração -->
-                <div class="flex justify-center md:justify-start space-x-4 mb-4 text-white">
+                <div class="flex justify-center md:justify-start space-x-4 mb-4 text-black">
                     <span class="flex items-center">
                         <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M6 2a1 1 0 000 2h1v1a1 1 0 102 0V4h2v1a1 1 0 102 0V4h1a1 1 0 100-2H6zM3 8a1 1 0 011-1h12a1 1 0 011 1v9a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm2 1v8h10V9H5z"></path>
@@ -56,7 +56,7 @@
                 </div>
 
                 <!-- Conteúdo/Descrição -->
-                <div class="prose max-w-none text-center md:text-left text-white w-128 overflow-hidden text-wrap text-clip">
+                <div class="prose max-w-none text-center md:text-left text-black w-128 overflow-hidden text-wrap text-clip">
                     {!! $post->content !!}
                 </div>
             </div>
@@ -69,7 +69,7 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
-    <div class="mt-12 bg-white/80 py-12">
+    <div class="mt-12 bg-gray-200 py-12">
         <div class="container mx-auto">
             <h2 class="text-2xl font-bold mb-6 text-center md:text-center text-gray-900">Prêmios e Reconhecimentos</h2>
 

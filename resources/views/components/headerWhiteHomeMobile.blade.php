@@ -13,6 +13,9 @@
         <!-- Right Side: Navigation Links -->
         <div class="flex space-x-8 text-white">
             <h2 class="font-black text-lg">
+                <a href="{{ route('about.index') }}">BIO</a>
+            </h2>
+            <h2 class="font-black text-lg">
                 <a href="{{ route('movies.index') }}">FILMES</a>
             </h2>
             <h2 class="font-black text-lg">
@@ -21,9 +24,7 @@
             <h2 class="font-black text-lg">
                 <a href="{{ route('blog.index') }}">POSTAGENS</a>
             </h2>
-            <h2 class="font-black text-lg">
-                <a href="{{ route('about.index') }}">BIO</a>
-            </h2>
+
         </div>
     </div>
 </div>
